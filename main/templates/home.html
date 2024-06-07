@@ -1,0 +1,119 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="landing-page">
+	<div class="landingPageBackgroundPhoto">
+		<div class="landingPageMainQuote">
+			<div class="callToActionContainer">
+				<h3>Unleash Your <br />Power</h3>
+				<div class="membershipBtnContainer">
+					{% comment %}
+					<button
+						type="button"
+						class="member-btn"
+						href="#"
+					>
+						Member Login
+					</button>
+					{% endcomment %}
+
+					<a
+						href="https://wolfhouse-30.maonrails.com/login"
+						target="_blank"
+					>
+						<button type="button" class="member-btn">
+							Member Login
+						</button></a
+					>
+				</div>
+			</div>
+		</div>
+
+		<div class="backgroundPhotoCover"></div>
+	</div>
+</div>
+
+<div class="verticalBarContainer">
+	<div class="verticalBar"></div>
+</div>
+
+<div class="secondCTAContainer">
+	<h3>Fitness For Everyone</h3>
+	<p>
+		At Wolfhouse, fitness is for everyone, from beginners
+		to experts. Our gym offers state-of-the-art equipment,
+		diverse classes, and supportive trainers. Join us to
+		unleash your potential and achieve your fitness goals.
+	</p>
+
+	<div class="moreInfoBtnContainer">
+		<button type="button" href="#">Learn More</button>
+	</div>
+</div>
+
+<div class="trainingContainer">
+	<h3>Training</h3>
+	<div class="specificTrainingContainer">
+		<div class="specificTrainingContainerCover">
+			<div class="sectionTitle">
+				<h4>Boxing</h4>
+				<h4>----</h4>
+			</div>
+		</div>
+	</div>
+	<div class="specificTrainingContainer">
+		<div class="specificTrainingContainerCover">
+			<div class="sectionTitle">
+				<h4>MMA</h4>
+				<h4>----</h4>
+			</div>
+		</div>
+	</div>
+	<div class="specificTrainingContainer">
+		<div class="specificTrainingContainerCover">
+			<div class="sectionTitle">
+				<h4>Kickboxing + Muay Thai</h4>
+				<h4>----</h4>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="starDivider">
+	{% load static %}
+	<img
+		src="{% static 'Icons\star (3).png' %}"
+		height="60"
+		width="60"
+	/>
+</div>
+
+<div class="membershipContainer">
+	<h3>Memberships</h3>
+
+	<div class="MembershipGroupContainer">
+		{% for membership in memberships %}
+
+		<div class="specificMembershipContainer">
+			<div class="specificMembershipSectionTitle">
+				<h4>{{ membership.title}}</h4>
+				<button onclick="displayMembershipInfo(this)">
+					+
+				</button>
+			</div>
+
+			<div class="membershipAdditionalInfo">
+				<div class="membershipAdditionalInfoCosting">
+					<p>${{ membership.monthly }}</p>
+					<span>/mo </span>
+				</div>
+				<div class="membershipAdditionalInfoCosting">
+					<p>${{ membership.yearly }}</p>
+					<span>/yr </span>
+				</div>
+				<span>{{ membership.extraDetail }}</span>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

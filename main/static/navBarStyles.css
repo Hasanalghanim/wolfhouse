@@ -1,0 +1,159 @@
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	transition: background-color 1s;
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+}
+
+@media (min-width: 992px) {
+	.navbar-toggle {
+		display: none;
+	}
+	.navbarMain {
+		width: 90%;
+		margin: auto;
+		overflow: hidden;
+		background-color: #ffffff;
+		position: sticky;
+		width: 100%;
+		z-index: 2;
+	}
+
+	.navbarContainer {
+		display: flex;
+		align-items: center;
+		width: 90%;
+		margin: auto;
+	}
+	.menu {
+		display: flex;
+		width: 100%;
+	}
+	.navbar-items {
+		width: 100%;
+		display: flex;
+		text-decoration: none;
+		gap: 1rem;
+		background-color: white;
+		justify-content: center;
+		text-transform: uppercase;
+	}
+
+	.navbarMain a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: black;
+		text-align: center;
+		text-decoration: none;
+		font-size: 1rem;
+	}
+	.navbarMain a:hover {
+		color: red;
+	}
+	.join-btn {
+		height: 2.56rem;
+		width: 9.63rem;
+		border-radius: 1.25rem;
+		white-space: nowrap;
+		font-size: 1rem;
+		background-color: transparent;
+		border-color: black;
+		transition-duration: 0.4s;
+	}
+	.join-btn:hover {
+		background-color: black;
+		color: white;
+	}
+}
+
+@media (max-width: 991px) {
+	.menu-open {
+		background-color: rgba(0, 0, 0, 0.8);
+	}
+	.navbar-toggle {
+		z-index: 3;
+	}
+
+	.bar1,
+	.bar2,
+	.bar3 {
+		width: 35px;
+		height: 5px;
+		background-color: #333;
+		margin: 6px 0;
+		transition: 0.4s;
+	}
+	.change .bar1 {
+		transform: translate(0, 11px) rotate(-45deg);
+		background-color: white;
+	}
+
+	.change .bar2 {
+		opacity: 0;
+	}
+
+	.change .bar3 {
+		transform: translate(0, -11px) rotate(45deg);
+		background-color: white;
+	}
+	.navbarContainer {
+		width: 90%;
+		margin: auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.join-btn {
+		display: none;
+	}
+
+	.menu {
+		display: none;
+		background-color: white;
+		transition: background-color 0.4s;
+	}
+
+	.navbar-items {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+
+	.menu.show {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #222222;
+		transition: all 0.4s ease;
+		opacity: 98%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		z-index: 2;
+	}
+
+	.navbar-items a {
+		text-decoration: none;
+		color: white;
+		padding: 10px;
+		display: block;
+	}
+}

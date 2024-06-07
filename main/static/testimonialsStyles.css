@@ -1,0 +1,16 @@
+.testimonialsContainer {
+	margin-top: 5rem;
+	width: 100%;
+	height: 23.375rem;
+	background-color: #222222;
+}
+.footerBar {
+	width: 80%;
+	height: 7.8rem;
+	background-color: white;
+	margin: auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+}
