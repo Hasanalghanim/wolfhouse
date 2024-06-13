@@ -21,7 +21,15 @@
 }
 
 .scheduleWidget {
+	padding: 10px;
 	width: 80%;
 	margin: auto;
 	box-sizing: border-box;
+	background-color: black;
+}
+
+@media (max-width: 991px) {
+	.scheduleContainer h3 {
+		font-size: 2.813rem;
+	}
 }

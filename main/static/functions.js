@@ -25,13 +25,22 @@ function displayMembershipInfoFromDiv(container) {
 	const additionalInfo = container.querySelector(
 		'.membershipAdditionalInfo'
 	);
-	if (
-		additionalInfo.style.display === 'none' ||
-		additionalInfo.style.display === ''
-	) {
+	const plusMinus = container.querySelector(
+		'#specificMembershipSectionPlusMinus'
+	);
+
+	if (!additionalInfo || !plusMinus) {
+		console.error('Required elements not found.');
+		return;
+	}
+	const currentDisplay =
+		window.getComputedStyle(additionalInfo).display;
+	if (currentDisplay === 'none') {
 		additionalInfo.style.display = 'block';
+		plusMinus.textContent = '-';
 	} else {
 		additionalInfo.style.display = 'none';
+		plusMinus.textContent = '+';
 	}
 }
 

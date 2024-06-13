@@ -31,18 +31,22 @@
 		</title>
 		<link
 			rel="stylesheet"
+			type="text/css"
 			href="{% static 'navBarStyles.css' %}"
 		/>
 		<link
 			rel="stylesheet"
+			type="text/css"
 			href="{% static 'homeStyles.css' %}"
 		/>
 		<link
 			rel="stylesheet"
+			type="text/css"
 			href="{% static 'testimonialsStyles.css' %}"
 		/>
 		<link
 			rel="stylesheet"
+			type="text/css"
 			href="{% static 'scheduleStyles.css' %}"
 		/>
 	</head>
@@ -60,7 +64,7 @@
 				</div>
 
 				<img src={% static 'Icons/wolfhouseLogo.png' %}
-				alt="Wolfhouse Logo" width="75" height="100" />
+				alt="Wolfhouse Logo" class="wolfhouseLogo" />
 
 				<div class="menu" id="menu">
 					<ul class="navbar-items" id="navbar-items">
@@ -126,8 +130,11 @@
 			<span> All Rights reserved.</span>
 		</footer>
 
-		<script src="{% static 'functions.js' %}"></script>
-		<script></script>
+		<script
+			type="text/javascript"
+			src="{% static 'functions.js' %}"
+		></script>
+
 		<script
 			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
