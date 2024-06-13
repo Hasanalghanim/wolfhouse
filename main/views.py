@@ -1,12 +1,13 @@
 from django.shortcuts import render, HttpResponse
-from .models import Membership
+from .models import Membership, Training
 
 # Create your views here.
 
 
 def home (request):
     memberships = Membership.objects.all()
-    return render(request, "home.html",{"memberships": memberships})
+    training = Training.objects.all()
+    return render(request, "home.html",{"memberships": memberships, "trainings":training})
 
 
 

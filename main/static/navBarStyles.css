@@ -17,6 +17,19 @@ body {
 	.navbar-toggle {
 		display: none;
 	}
+	.navBarJoinBtn {
+		display: none;
+	}
+	.navBarJoinBtn button {
+		display: none;
+	}
+
+	.navBarLoginBtn {
+		display: none;
+	}
+	.navBarLoginBtn button {
+		display: none;
+	}
 	.navbarMain {
 		width: 90%;
 		margin: auto;
@@ -106,7 +119,7 @@ body {
 		background-color: white;
 	}
 	.navbarContainer {
-		width: 90%;
+		width: 80%;
 		margin: auto;
 		display: flex;
 		justify-content: space-between;
@@ -115,6 +128,33 @@ body {
 
 	.join-btn {
 		display: none;
+	}
+
+	.navBarLoginBtn {
+		display: none;
+	}
+	.navBarLoginBtn button {
+		height: 2.56rem;
+		width: 9.63rem;
+		border-radius: 1.25rem;
+		white-space: nowrap;
+		font-size: 1rem;
+		background-color: #fef102;
+
+		transition-duration: 0.4s;
+	}
+	.navBarJoinBtn {
+		display: none;
+	}
+	.navBarJoinBtn button {
+		height: 2.56rem;
+		width: 9.63rem;
+		border-radius: 1.25rem;
+		white-space: nowrap;
+		font-size: 1rem;
+		background-color: white;
+		border-color: black;
+		transition-duration: 0.4s;
 	}
 
 	.menu {
@@ -155,5 +195,6 @@ body {
 		color: white;
 		padding: 10px;
 		display: block;
+		font-size: 1.25rem;
 	}
 }

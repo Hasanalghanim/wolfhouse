@@ -6,16 +6,6 @@
 			<div class="callToActionContainer">
 				<h3>Unleash Your <br />Power</h3>
 				<div class="membershipBtnContainer">
-					{% comment %}
-					<button
-						type="button"
-						class="member-btn"
-						href="#"
-					>
-						Member Login
-					</button>
-					{% endcomment %}
-
 					<a
 						href="https://wolfhouse-30.maonrails.com/login"
 						target="_blank"
@@ -45,37 +35,32 @@
 		unleash your potential and achieve your fitness goals.
 	</p>
 
+	{% comment %}
 	<div class="moreInfoBtnContainer">
 		<button type="button" href="#">Learn More</button>
 	</div>
+	{% endcomment %}
 </div>
 
 <div class="trainingContainer">
 	<h3>Training</h3>
-	<div class="specificTrainingContainer">
+	{% for training in trainings %}
+	<div
+		id="specificTrainingContainer{{ forloop.counter }}"
+		class="specificTrainingContainer"
+		data-original-url="{{ training.image.url }}"
+		data-cropped-url="{{ training.croppedImage.url }}"
+	>
+		{% comment %} style="background-image: url('{{
+		training.image.url }}');" {% endcomment %}
 		<div class="specificTrainingContainerCover">
 			<div class="sectionTitle">
-				<h4>Boxing</h4>
-				<h4>----</h4>
+				<h4>{{ training.title}}</h4>
 			</div>
 		</div>
 	</div>
-	<div class="specificTrainingContainer">
-		<div class="specificTrainingContainerCover">
-			<div class="sectionTitle">
-				<h4>MMA</h4>
-				<h4>----</h4>
-			</div>
-		</div>
-	</div>
-	<div class="specificTrainingContainer">
-		<div class="specificTrainingContainerCover">
-			<div class="sectionTitle">
-				<h4>Kickboxing + Muay Thai</h4>
-				<h4>----</h4>
-			</div>
-		</div>
-	</div>
+
+	{% endfor %}
 </div>
 <div class="starDivider">
 	{% load static %}
@@ -92,12 +77,13 @@
 	<div class="MembershipGroupContainer">
 		{% for membership in memberships %}
 
-		<div class="specificMembershipContainer">
+		<div
+			class="specificMembershipContainer"
+			onclick="displayMembershipInfoFromDiv(this)"
+		>
 			<div class="specificMembershipSectionTitle">
 				<h4>{{ membership.title}}</h4>
-				<button onclick="displayMembershipInfo(this)">
-					+
-				</button>
+				<h5 onclick="displayMembershipInfo(this)">+</h5>
 			</div>
 
 			<div class="membershipAdditionalInfo">
@@ -106,6 +92,7 @@
 					<span>/mo </span>
 				</div>
 				<div class="membershipAdditionalInfoCosting">
+					<span>or</span>
 					<p>${{ membership.yearly }}</p>
 					<span>/yr </span>
 				</div>

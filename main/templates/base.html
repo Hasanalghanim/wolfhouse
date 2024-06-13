@@ -59,7 +59,7 @@
 					<div class="bar3"></div>
 				</div>
 
-				<img src={% static 'icons/wolfhouseLogo.png' %}
+				<img src={% static 'Icons/wolfhouseLogo.png' %}
 				alt="Wolfhouse Logo" width="75" height="100" />
 
 				<div class="menu" id="menu">
@@ -76,19 +76,31 @@
 						{% comment %}
 						<a href="#home">Contact</a>
 						{% endcomment %}
+
+						<a
+							href="https://wolfhouse-30.maonrails.com/login"
+							target="_blank"
+							class="navBarLoginBtn"
+						>
+							<button type="button">LOGIN</button></a
+						>
+
+						<a
+							href="https://www.maonrails.com/signup/member/8xw"
+							target="_blank"
+							class="navBarJoinBtn"
+						>
+							<button type="button">
+								CREATE ACCOUNT
+							</button></a
+						>
 					</ul>
 				</div>
-				{% comment %}
-				<button
-					type="button"
-					class="btn btn-outline-dark join-btn"
-				>
-					Join Today
-				</button>
-				{% endcomment %}
+
 				<a
 					href="https://www.maonrails.com/signup/member/8xw"
 					target="_blank"
+					class="join-btn"
 				>
 					<button type="button" class="join-btn">
 						Join Today
@@ -99,7 +111,7 @@
 					href="https://wolfhouse-30.maonrails.com/login"
 					target="_blank"
 				>
-					<img src={% static 'icons/log-in.png' %}
+					<img src={% static 'Icons/log-in.png' %}
 					alt="Log in button" width="40" height="35" />
 				</a>
 			</div>
@@ -114,40 +126,8 @@
 			<span> All Rights reserved.</span>
 		</footer>
 
-		<script>
-			// JavaScript to toggle navbar items when hamburger button is clicked
-			function menuToggle() {
-				document
-					.getElementById('menu')
-					.classList.toggle('show');
-				document.body.classList.toggle('menu-open');
-				document
-					.getElementById('navbar-toggle')
-					.classList.toggle('change');
-			}
-			function displayMembershipInfo(button) {
-				const additionalInfo =
-					button.parentElement.nextElementSibling;
-				if (
-					additionalInfo.style.display === 'none' ||
-					additionalInfo.style.display === ''
-				) {
-					additionalInfo.style.display = 'block';
-					button.textContent = '-';
-				} else {
-					additionalInfo.style.display = 'none';
-					button.textContent = '+';
-				}
-			}
-
-			function setFooterYear() {
-				const yearElement =
-					document.getElementById('footer-year');
-				const currentYear = new Date().getFullYear();
-				yearElement.textContent = currentYear;
-			}
-			window.onload = setFooterYear;
-		</script>
+		<script src="{% static 'functions.js' %}"></script>
+		<script></script>
 		<script
 			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
