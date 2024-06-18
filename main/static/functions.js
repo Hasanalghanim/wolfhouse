@@ -13,7 +13,7 @@ function displayMembershipInfo(button) {
 		additionalInfo.style.display === 'none' ||
 		additionalInfo.style.display === ''
 	) {
-		additionalInfo.style.display = 'block';
+		additionalInfo.style.display = 'flex';
 		button.textContent = '-';
 	} else {
 		additionalInfo.style.display = 'none';
@@ -36,7 +36,7 @@ function displayMembershipInfoFromDiv(container) {
 	const currentDisplay =
 		window.getComputedStyle(additionalInfo).display;
 	if (currentDisplay === 'none') {
-		additionalInfo.style.display = 'block';
+		additionalInfo.style.display = 'flex';
 		plusMinus.textContent = '-';
 	} else {
 		additionalInfo.style.display = 'none';

@@ -181,6 +181,8 @@
 .specificMembershipContainer {
 	width: 100%;
 	cursor: pointer;
+	padding-top: 12.5px;
+	padding-bottom: 12.5px;
 }
 
 .specificMembershipSectionTitle {
@@ -210,11 +212,12 @@
 }
 .membershipAdditionalInfo {
 	display: none;
-	margin-top: 10px;
-	padding: 10px;
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: column;
 }
 
-.membershipAdditionalInfo p {
+.membershipAdditionalInfo strong {
 	font-family: 'Barlow Condensed', sans-serif;
 	font-weight: 800;
 	font-size: 1.563rem;
@@ -222,11 +225,37 @@
 	text-transform: uppercase;
 	color: black;
 }
+
+.membershipAdditionalInfo p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 1.563rem;
+	text-align: start;
+	color: black;
+}
 .membershipAdditionalInfoCosting {
 	display: flex;
 	gap: 0.2rem;
 	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
+	line-height: 0.5;
+	flex-direction: column;
+}
+
+.membershipAdditionalInfoExtraInfo {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 1.563rem;
+	text-align: start;
+	color: black;
+	margin-top: 2rem;
+}
+
+.membershipAdditionalInfoExtraInfo p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 1.563rem;
+	text-align: start;
+	color: black;
+	margin: 0;
+	line-height: 0.5;
 }
 @media (min-width: 992px) {
 }
