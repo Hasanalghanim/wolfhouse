@@ -49,6 +49,7 @@ body {
 		align-items: center;
 		width: 90%;
 		margin: auto;
+		height: 9.375rem;
 	}
 	.menu {
 		display: flex;
@@ -111,8 +112,8 @@ body {
 		transition: 0.4s;
 	}
 	.wolfhouseLogo {
-		width: 33px;
-		height: 40px;
+		width: 61px;
+		height: 73px;
 	}
 	.change .bar1 {
 		transform: translate(0, 11px) rotate(-50deg);
@@ -133,6 +134,7 @@ body {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		height: 6.875rem;
 	}
 
 	.join-btn {
