@@ -141,6 +141,9 @@ body {
 		display: none;
 	}
 
+	.loginIcon {
+		display: none;
+	}
 	.navBarLoginBtn {
 		display: none;
 	}

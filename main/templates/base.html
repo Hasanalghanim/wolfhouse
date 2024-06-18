@@ -53,6 +53,8 @@
 	<body>
 		<nav class="navbarMain">
 			<div class="navbarContainer">
+				<img src={% static 'Icons/newlogo.png' %}
+				alt="Wolfhouse Logo" class="wolfhouseLogo" />
 				<div
 					class="navbar-toggle"
 					id="navbar-toggle"
@@ -62,10 +64,6 @@
 					<div class="bar2"></div>
 					<div class="bar3"></div>
 				</div>
-
-				<img src={% static 'Icons/newlogo.png' %}
-				alt="Wolfhouse Logo" class="wolfhouseLogo" />
-
 				<div class="menu" id="menu">
 					<ul class="navbar-items" id="navbar-items">
 						<a href="/">Home</a>
@@ -114,6 +112,7 @@
 				<a
 					href="https://wolfhouse-30.maonrails.com/login"
 					target="_blank"
+					class="loginIcon"
 				>
 					<img src={% static 'Icons/log-in.png' %}
 					alt="Log in button" width="40" height="35" />
