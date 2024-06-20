@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		const containers = document.querySelectorAll(
 			'.specificTrainingContainer'
 		);
-		const background = document.querySelectorAll(
-			'.landingPageBackgroundPhoto'
+		const background = document.getElementById(
+			'landingPageBackgroundPhoto'
 		);
-
+		console.log(background);
 		containers.forEach((container) => {
 			const originalUrl = container.getAttribute(
 				'data-original-url'
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			if (window.innerWidth <= 800) {
 				container.style.backgroundImage = `url(${originalUrl})`;
-				background.styles.backgroundImage = `url(${originalUrl})`;
+				background.style.backgroundImage = `url(${originalUrl})`;
 			} else {
 				container.style.backgroundImage = `url(${croppedUrl})`;
-				background.styles.backgroundImage = `url(${croppedUrl})`;
+				background.style.backgroundImage = `url(${croppedUrl})`;
 			}
 		});
 	}

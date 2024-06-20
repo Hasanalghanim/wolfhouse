@@ -275,7 +275,7 @@
 
 @media (max-width: 991px) {
 	.landingPageBackgroundPhoto {
-		background: url('/static/Icons/ryanGame.jpg');
+		/* background: url('/static/Icons/ryanGame.jpg'); */
 
 		width: 100%;
 		min-height: 21.25rem;
