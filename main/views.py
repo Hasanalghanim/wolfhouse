@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .models import Membership, Training
+from .models import Membership, Training, Background
 
 # Create your views here.
 
@@ -7,7 +7,8 @@ from .models import Membership, Training
 def home (request):
     memberships = Membership.objects.all()
     training = Training.objects.all()
-    return render(request, "home.html",{"memberships": memberships, "trainings":training})
+    backgrounds = Background.objects.filter(deleted=False)
+    return render(request, "home.html",{"memberships": memberships, "trainings":training, "backgrounds":backgrounds})
 
 
 

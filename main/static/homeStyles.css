@@ -181,6 +181,16 @@
 	flex-direction: column;
 	gap: 2rem;
 }
+
+.membershipContainer h3 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-align: start;
+	text-transform: uppercase;
+	color: #222222;
+}
+
 .specificMembershipContainer {
 	width: 100%;
 	cursor: pointer;

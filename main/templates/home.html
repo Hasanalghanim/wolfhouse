@@ -1,7 +1,12 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="landing-page">
-	<div class="landingPageBackgroundPhoto">
+	{% for background in backgrounds %}
+	<div
+		class="landingPageBackgroundPhoto"
+		data-original-url=""
+		data-cropped-url=""
+	>
 		<div class="landingPageMainQuote">
 			<div class="callToActionContainer">
 				<h3>Unleash Your <br />Power</h3>
@@ -20,6 +25,7 @@
 
 		<div class="backgroundPhotoCover"></div>
 	</div>
+	{% endfor %}
 </div>
 
 <div class="verticalBarContainer">

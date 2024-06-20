@@ -20,3 +20,12 @@ class Training(models.Model):
     extraDetail = models.TextField(max_length=500,blank=True, null=True)
     def __str__(self):
         return self.title
+
+
+class Background(models.Model): 
+    title = models.CharField(max_length=200) 
+    image = models.ImageField(upload_to='images/')
+    croppedImage = models.ImageField(upload_to='images/', blank=True, null=True)
+    deleted = models.BooleanField()
+    def __str__(self):
+        return self.title
