@@ -41,6 +41,9 @@
 	display: flex;
 	justify-content: center;
 }
+.membershipBtnContainer a {
+	color: black;
+}
 .member-btn {
 	height: 2.56rem;
 	width: 9.63rem;
@@ -48,12 +51,8 @@
 	white-space: nowrap;
 	font-size: 1rem;
 	background-color: yellow;
-	border-color: black;
 	transition-duration: 0.4s;
-}
-.member-btn:hover {
-	background-color: black;
-	color: white;
+	color: black;
 }
 
 .verticalBarContainer {
@@ -127,9 +126,8 @@
 }
 .specificTrainingContainer {
 	width: 100%;
-	height: 20.25rem;
+	height: 16.25rem;
 	background-color: red;
-	/* background: url('/static/Icons/boxingBackground.jpg'); */
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-color: white;
@@ -153,8 +151,9 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: end;
-	padding: 4rem;
+	padding: 1rem;
 }
+
 .sectionTitle h4 {
 	font-family: 'Barlow Condensed', sans-serif;
 	font-weight: 800;
@@ -294,6 +293,16 @@
 		width: 80%;
 		margin: auto;
 		font-size: 1.25rem;
+	}
+
+	.specificTrainingContainer {
+		width: 100%;
+		height: 11.438rem;
+		background-color: red;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-color: white;
+		position: relative;
 	}
 	.specificMembershipSectionTitle h4 {
 		font-size: 1.563rem;

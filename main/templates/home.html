@@ -34,12 +34,6 @@
 		diverse classes, and supportive trainers. Join us to
 		unleash your potential and achieve your fitness goals.
 	</p>
-
-	{% comment %}
-	<div class="moreInfoBtnContainer">
-		<button type="button" href="#">Learn More</button>
-	</div>
-	{% endcomment %}
 </div>
 
 <div class="trainingContainer">
@@ -51,8 +45,6 @@
 		data-original-url="{{ training.image.url }}"
 		data-cropped-url="{{ training.croppedImage.url }}"
 	>
-		{% comment %} style="background-image: url('{{
-		training.image.url }}');" {% endcomment %}
 		<div class="specificTrainingContainerCover">
 			<div class="sectionTitle">
 				<h4>{{ training.title}}</h4>
@@ -97,15 +89,16 @@
 						/mo
 					</p>
 				</div>
+				{% if membership.yearly %}
 				<div class="membershipAdditionalInfoCosting">
 					<p>
 						or
 						<strong>${{ membership.yearly }}</strong
 						>/yr
 					</p>
-					<span>Price includes Tax</span>
 				</div>
-
+				{% endif %}
+				<span>Price includes Tax</span>
 				<div class="membershipAdditionalInfoExtraInfo">
 					<span
 						>{{ membership.extraDetail|safe }}</span
