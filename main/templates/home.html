@@ -4,8 +4,8 @@
 	{% for background in backgrounds %}
 	<div
 		class="landingPageBackgroundPhoto"
-		data-original-url=""
-		data-cropped-url=""
+		data-original-url="{{background.image.url}}"
+		data-cropped-url="{{background.croppedImage.url}}"
 	>
 		<div class="landingPageMainQuote">
 			<div class="callToActionContainer">
