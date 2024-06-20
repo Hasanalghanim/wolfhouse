@@ -100,6 +100,7 @@ body {
 	}
 	.navbar-toggle {
 		z-index: 3;
+		cursor: pointer;
 	}
 
 	.bar1,
@@ -111,6 +112,7 @@ body {
 		margin: 6px 0;
 		transition: 0.4s;
 	}
+
 	.wolfhouseLogo {
 		width: 61px;
 		height: 73px;
@@ -210,5 +212,8 @@ body {
 		padding: 10px;
 		display: block;
 		font-size: 1.25rem;
+	}
+	.navbar-items a:hover {
+		color: red;
 	}
 }
