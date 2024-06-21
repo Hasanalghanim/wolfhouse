@@ -134,6 +134,7 @@
 	background-color: red;
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-position: center;
 	background-color: white;
 	position: relative;
 }
@@ -313,8 +314,9 @@
 		width: 100%;
 		height: 11.438rem;
 		background-color: red;
-		background-size: cover;
+		background-size: contain;
 		background-repeat: no-repeat;
+		background-position: center;
 		background-color: white;
 		position: relative;
 	}
