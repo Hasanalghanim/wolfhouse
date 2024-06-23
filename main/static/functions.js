@@ -104,3 +104,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		updateLandingPageImages
 	);
 });
+
+function copyToClipboard() {
+	// Get the text field
+
+	// Copy the text inside the text field
+	navigator.clipboard.writeText(
+		'11507 120 St NW #200 Edmonton, AB T5G 2Y2'
+	);
+
+	// Alert the copied text
+	alert(
+		'Copied the text: ' +
+			'11507 120 St NW #200 Edmonton, AB T5G 2Y2'
+	);
+}

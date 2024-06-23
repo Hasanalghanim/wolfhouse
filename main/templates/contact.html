@@ -13,28 +13,34 @@
 
 		<div class="contactDetailLogos">
 			<div>
-				<img src={% static 'Icons/phoneCall.png' %}
-				alt="Phone Icon" class=""
-				height='58'width='58'/>
+				<a href="tel:780-937-6360"
+					><img src={% static 'Icons/whitePhone.png' %}
+					alt="Phone Icon" class=""
+					height='46'width='46'/></a
+				>
+
 				<h4>phone</h4>
 				<p>780 999 9999</p>
 			</div>
 
 			<div>
-				<img src={% static 'Icons/email.png' %}
-				alt="email Icon" class=""
-				height='58'width='58'/>
+				<a href="mailto:">
+					<img src={% static 'Icons/whiteEmail.png' %}
+					alt="email Icon" class=""
+					height='46'width='46'/>
+				</a>
 				<h4>Email</h4>
-				<p>email@wolfhouse.com</p>
+				<p>wolfhousefrontdesk@gmail.com</p>
 			</div>
 
-			<div>
-				<img src={% static 'Icons/email.png' %}
+			<div onclick="copyToClipboard()">
+				<img src={% static 'Icons/whiteGps.png' %}
 				alt="email Icon" class=""
-				height='58'width='58'/>
+				height='46'width='46'/>
 				<h4>Location</h4>
 				<p>
-					11507 120 St NW #200, Edmonton, AB T5G 2Y2
+					11507 120 St NW #200,
+					<br />Edmonton, AB T5G 2Y2
 				</p>
 			</div>
 		</div>
