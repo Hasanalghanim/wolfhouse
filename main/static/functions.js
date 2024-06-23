@@ -57,10 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const containers = document.querySelectorAll(
 			'.specificTrainingContainer'
 		);
-		const background = document.getElementById(
-			'landingPageBackgroundPhoto'
-		);
-		console.log(background);
+
 		containers.forEach((container) => {
 			const originalUrl = container.getAttribute(
 				'data-original-url'
@@ -71,20 +68,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			if (window.innerWidth <= 800) {
 				container.style.backgroundImage = `url(${originalUrl})`;
-				background.style.backgroundImage = `url(${originalUrl})`;
 			} else {
 				container.style.backgroundImage = `url(${croppedUrl})`;
-				background.style.backgroundImage = `url(${croppedUrl})`;
 			}
 		});
 	}
 
+	function updateLandingPageImages() {
+		const backgrounds = document.querySelectorAll(
+			'.landingPageBackgroundPhoto'
+		);
+		backgrounds.forEach((background) => {
+			const originalUrl = background.getAttribute(
+				'data-original-url'
+			);
+			const croppedUrl = background.getAttribute(
+				'data-cropped-url'
+			);
+
+			if (window.innerWidth <= 800) {
+				background.style.backgroundImage = `url(${originalUrl})`;
+			} else {
+				background.style.backgroundImage = `url(${croppedUrl})`;
+			}
+		});
+	}
 	// Update background images on initial load
 	updateBackgroundImages();
+	updateLandingPageImages();
 
 	// Update background images on window resize
 	window.addEventListener(
 		'resize',
-		updateBackgroundImages
+		updateBackgroundImages,
+		updateLandingPageImages
 	);
 });

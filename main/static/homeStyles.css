@@ -2,6 +2,7 @@
 	/* background: url('/static/Icons/ryanGame.jpg'); */
 	background-size: cover;
 	background-color: white;
+	background-position: center;
 	width: 100%;
 	min-height: 31.75rem;
 }
@@ -10,7 +11,7 @@
 	height: 31.75rem;
 	background-color: black;
 	position: absolute;
-	opacity: 50%;
+	opacity: 40%;
 }
 
 .landingPageMainQuote {
@@ -112,29 +113,31 @@
 	border-color: black;
 	transition-duration: 0.4s;
 }
-
 .trainingContainer {
 	width: 80%;
 	margin: auto;
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
 }
+.trainingWrapper {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	gap: 0.8rem;
+}
+
 .trainingContainer h3 {
 	font-family: 'Barlow Condensed', sans-serif;
 	font-weight: 800;
-	font-size: 1.563rem;
+	font-size: 2.5rem;
 	text-align: start;
 	text-transform: uppercase;
-	color: #222222;
+	color: black;
 }
 .specificTrainingContainer {
 	width: 100%;
 	height: 16.25rem;
-	background-color: red;
+	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: center;
 	background-color: white;
 	position: relative;
 }
@@ -145,7 +148,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.4);
 	z-index: 0;
 }
 .sectionTitle {
@@ -186,10 +189,10 @@
 .membershipContainer h3 {
 	font-family: 'Barlow Condensed', sans-serif;
 	font-weight: 800;
-	font-size: 1.563rem;
+	font-size: 2.5rem;
 	text-align: start;
 	text-transform: uppercase;
-	color: #222222;
+	color: black;
 }
 
 .specificMembershipContainer {
@@ -301,27 +304,41 @@
 	.secondCTAContainer p {
 		width: 60%;
 	}
+
 	.trainingContainer {
 		width: 100%;
+		margin: auto;
 	}
+	.trainingWrapper {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 100%;
+		gap: 0.5rem;
+	}
+
 	.trainingContainer h3 {
 		width: 80%;
 		margin: auto;
-		font-size: 1.25rem;
+		font-size: 1.563rem;
 	}
 
 	.specificTrainingContainer {
 		width: 100%;
 		height: 11.438rem;
-		background-color: red;
-		background-size: contain;
-		background-repeat: no-repeat;
 		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
 		background-color: white;
 		position: relative;
 	}
+
+	.sectionTitle {
+		padding-bottom: 1rem;
+		padding-left: 3rem;
+	}
 	.specificMembershipSectionTitle h4 {
 		font-size: 1.563rem;
+		padding-left: 3rem;
 	}
 	.membershipAdditionalInfo p {
 		font-size: 1.25rem;

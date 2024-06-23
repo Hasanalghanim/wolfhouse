@@ -4,7 +4,7 @@
 	{% for background in backgrounds %}
 	<div
 		class="landingPageBackgroundPhoto"
-		id="landingPageBackgroundPhoto"
+		id="landingPageBackgroundPhoto_{{ forloop.counter }}"
 		data-original-url="{{background.image.url}}"
 		data-cropped-url="{{background.croppedImage.url}}"
 	>
@@ -45,21 +45,23 @@
 
 <div class="trainingContainer">
 	<h3>Training</h3>
-	{% for training in trainings %}
-	<div
-		id="specificTrainingContainer{{ forloop.counter }}"
-		class="specificTrainingContainer"
-		data-original-url="{{ training.image.url }}"
-		data-cropped-url="{{ training.croppedImage.url }}"
-	>
-		<div class="specificTrainingContainerCover">
-			<div class="sectionTitle">
-				<h4>{{ training.title}}</h4>
+	<div class="trainingWrapper">
+		{% for training in trainings %}
+		<div
+			id="specificTrainingContainer{{ forloop.counter }}"
+			class="specificTrainingContainer"
+			data-original-url="{{ training.image.url }}"
+			data-cropped-url="{{ training.croppedImage.url }}"
+		>
+			<div class="specificTrainingContainerCover">
+				<div class="sectionTitle">
+					<h4>{{ training.title}}</h4>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	{% endfor %}
+		{% endfor %}
+	</div>
 </div>
 <div class="starDivider">
 	{% load static %}
