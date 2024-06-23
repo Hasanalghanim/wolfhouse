@@ -119,3 +119,46 @@ function copyToClipboard() {
 			'11507 120 St NW #200 Edmonton, AB T5G 2Y2'
 	);
 }
+
+document
+	.getElementById('locationCopyBtn')
+	.addEventListener('click', function () {
+		copyToClipboard();
+	});
+
+function copyToClipboard() {
+	const textToCopy =
+		'11507 120 St NW #200 Edmonton, AB T5G 2Y2';
+
+	// Check if the clipboard API is available
+	if (navigator.clipboard) {
+		navigator.clipboard
+			.writeText(textToCopy)
+			.then(() => {
+				alert('Copied the text: ' + textToCopy);
+			})
+			.catch((err) => {
+				console.error('Failed to copy text: ', err);
+				alert('Failed to copy text.');
+			});
+	} else {
+		// Fallback for older browsers
+		const textArea = document.createElement('textarea');
+		textArea.value = textToCopy;
+		textArea.style.position = 'fixed'; // Avoid scrolling to bottom of page in MS Edge.
+		document.body.appendChild(textArea);
+		textArea.focus();
+		textArea.select();
+		try {
+			document.execCommand('copy');
+			alert('Copied the text: ' + textToCopy);
+		} catch (err) {
+			console.error(
+				'Fallback: Oops, unable to copy',
+				err
+			);
+			alert('Failed to copy text.');
+		}
+		document.body.removeChild(textArea);
+	}
+}
