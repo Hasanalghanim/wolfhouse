@@ -88,7 +88,6 @@ body {
 		width: 9.63rem;
 		border-radius: 1.25rem;
 		white-space: nowrap;
-
 		background-color: transparent;
 		border-color: black;
 		transition-duration: 0.4s;
@@ -162,10 +161,9 @@ body {
 		width: 9.63rem;
 		border-radius: 1.25rem;
 		white-space: nowrap;
-
 		background-color: #fef102;
-
 		transition-duration: 0.4s;
+		border: 0px;
 	}
 	.navBarJoinBtn {
 		display: none;
@@ -182,6 +180,7 @@ body {
 		background-color: white;
 		border-color: black;
 		transition-duration: 0.4s;
+		border: 0px;
 	}
 
 	.menu {

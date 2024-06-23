@@ -58,6 +58,7 @@
 	background-color: yellow;
 	transition-duration: 0.4s;
 	color: black;
+	border: 0px;
 }
 
 .verticalBarContainer {
@@ -116,6 +117,9 @@
 .trainingContainer {
 	width: 80%;
 	margin: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 }
 .trainingWrapper {
 	width: 100%;
@@ -266,7 +270,7 @@
 	margin-top: 2rem;
 }
 
-.membershipAdditionalInfoExtraInfo p {
+.membershipAdditionalInfoExtraInfo span {
 	font-family: 'Barlow Condensed', sans-serif;
 	font-size: 1.563rem;
 	text-align: start;
@@ -308,6 +312,9 @@
 	.trainingContainer {
 		width: 90%;
 		margin: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
 	}
 	.trainingWrapper {
 		width: 100%;
@@ -337,7 +344,8 @@
 		padding-left: 3rem;
 	}
 	.specificMembershipSectionTitle h4 {
-		font-size: 1.563rem;
+		font-size: 2.25rem;
+		margin-bottom: 1rem;
 	}
 
 	.membershipContainer h3 {
@@ -347,6 +355,9 @@
 	}
 
 	.membershipAdditionalInfo p {
-		font-size: 1.25rem;
+		font-size: 1.313rem;
+	}
+	.membershipAdditionalInfoExtraInfo {
+		font-size: 0.75rem;
 	}
 }
