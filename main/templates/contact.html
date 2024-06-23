@@ -1,0 +1,54 @@
+{% extends "base.html" %} {%load static%}{% block content %}
+<div class="contactUsMainDiv">
+	<div class="contactLandingPage">
+		<div class="contactContainer">
+			<h3>Contact Us</h3>
+		</div>
+	</div>
+
+	<div class="contactDetail">
+		<div class="contactContainerTitle">
+			<h4>WE ARE AVAILABLE BY</h4>
+		</div>
+
+		<div class="contactDetailLogos">
+			<div>
+				<img src={% static 'Icons/phoneCall.png' %}
+				alt="Phone Icon" class=""
+				height='58'width='58'/>
+				<h4>phone</h4>
+				<p>780 999 9999</p>
+			</div>
+
+			<div>
+				<img src={% static 'Icons/email.png' %}
+				alt="email Icon" class=""
+				height='58'width='58'/>
+				<h4>Email</h4>
+				<p>email@wolfhouse.com</p>
+			</div>
+
+			<div>
+				<img src={% static 'Icons/email.png' %}
+				alt="email Icon" class=""
+				height='58'width='58'/>
+				<h4>Location</h4>
+				<p>
+					11507 120 St NW #200, Edmonton, AB T5G 2Y2
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="mapContainer">
+		<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.5005754761455!2d-113.53118122325483!3d53.56668227235403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a021a014ab62d7%3A0x810b2d8ae14e8e34!2sWOLFHOUSE%20MMA!5e0!3m2!1sen!2sca!4v1719117093954!5m2!1sen!2sca"
+			width="600"
+			height="450"
+			style="border: 0"
+			allowfullscreen=""
+			loading="lazy"
+			referrerpolicy="no-referrer-when-downgrade"
+		></iframe>
+	</div>
+</div>
+{% endblock %}

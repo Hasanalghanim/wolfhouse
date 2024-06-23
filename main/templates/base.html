@@ -49,6 +49,11 @@
 			type="text/css"
 			href="{% static 'scheduleStyles.css' %}"
 		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'contactStyles.css' %}"
+		/>
 	</head>
 	<body>
 		<nav class="navbarMain">
@@ -75,9 +80,8 @@
 						<a href="#home">Coaches</a>
 						{% endcomment %}
 						<a href="/schedule">Schedule</a>
-						{% comment %}
-						<a href="#home">Contact</a>
-						{% endcomment %}
+
+						<a href="/contact">Contact</a>
 
 						<a
 							href="https://wolfhouse-30.maonrails.com/login"

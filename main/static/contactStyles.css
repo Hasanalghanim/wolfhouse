@@ -1,0 +1,96 @@
+.contactUsMainDiv {
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+}
+
+.contactLandingPage {
+	width: 80%;
+	height: 12rem;
+	margin: auto;
+}
+
+.contactContainer {
+	margin-top: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contactContainer h3 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-style: bold;
+	font-size: 6.88rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.contactDetail {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+
+.contactContainerTitle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contactContainerTitle h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-transform: uppercase;
+}
+.contactDetailLogos {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.contactDetailLogos div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 10rem;
+}
+.contactDetailLogos img {
+	margin-bottom: 1rem;
+}
+.contactDetailLogos h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.25rem;
+	text-transform: uppercase;
+	margin: 0px;
+	text-wrap: wrap;
+	text-align: center;
+}
+
+.contactDetailLogos p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+.mapContainer {
+	width: 100%;
+}
+
+.mapContainer iframe {
+	width: 100%;
+}
+@media (max-width: 991px) {
+	.contactUsMainDiv {
+		gap: 0rem;
+	}
+
+	.contactContainer h3 {
+		font-size: 2.813rem;
+	}
+}

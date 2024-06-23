@@ -14,3 +14,8 @@ def home (request):
 
 def schedule (request):
     return render(request, "schedule.html",)
+
+
+
+def contact (request):
+    return render(request, "contact.html",)
