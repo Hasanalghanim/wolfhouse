@@ -38,6 +38,7 @@ class Background(models.Model):
 
 class Coach(models.Model): 
     name = models.CharField(max_length=200) 
+    disciple = models.CharField(max_length=500,blank=True, null=True)
     image = models.ImageField(upload_to='images/')
     bio = models.TextField(max_length=500,blank=True, null=True)
     stats = models.CharField(max_length=500,blank=True, null=True)
