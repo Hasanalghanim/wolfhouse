@@ -13,7 +13,7 @@ def home (request):
 
 
 def coaches (request):
-    activeCoaches = Coach.objects.filter(deleted=False).order_by('orderNumber').values()
+    activeCoaches = Coach.objects.filter(deleted=False).order_by('orderNumber')
     return render(request, "coaches.html", {'coaches' : activeCoaches})
 
 def schedule (request):
