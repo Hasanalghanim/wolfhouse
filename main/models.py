@@ -42,6 +42,7 @@ class Coach(models.Model):
     image = models.ImageField(upload_to='images/')
     bio = models.TextField(max_length=500,blank=True, null=True)
     stats = models.CharField(max_length=500,blank=True, null=True)
+    orderNumber = models.IntegerField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     def __str__(self):
         return self.name
