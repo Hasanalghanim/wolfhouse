@@ -54,6 +54,12 @@
 			type="text/css"
 			href="{% static 'contactStyles.css' %}"
 		/>
+
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'coachesStyles.css' %}"
+		/>
 	</head>
 	<body>
 		<nav class="navbarMain">
@@ -72,17 +78,9 @@
 				<div class="menu" id="menu">
 					<ul class="navbar-items" id="navbar-items">
 						<a href="/">Home</a>
-						{% comment %}
-						<a href="#home">About</a>
-						{% endcomment %} {% comment %}
-						<a href="#home">Programs</a>
-						{% endcomment %} {% comment %}
-						<a href="#home">Coaches</a>
-						{% endcomment %}
+						<a href="/coaches">Coaches</a>
 						<a href="/schedule">Schedule</a>
-
 						<a href="/contact">Contact</a>
-
 						<a
 							href="https://wolfhouse-30.maonrails.com/login"
 							target="_blank"
@@ -90,7 +88,6 @@
 						>
 							<button type="button">LOGIN</button></a
 						>
-
 						<a
 							href="https://www.maonrails.com/signup/member/8xw"
 							target="_blank"

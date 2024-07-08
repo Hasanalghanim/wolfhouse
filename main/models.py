@@ -29,3 +29,15 @@ class Background(models.Model):
     deleted = models.BooleanField()
     def __str__(self):
         return self.title
+    
+
+
+
+class Coach(models.Model): 
+    name = models.CharField(max_length=200) 
+    image = models.ImageField(upload_to='images/')
+    bio = models.TextField(max_length=500,blank=True, null=True)
+    stats = models.CharField(max_length=500,blank=True, null=True)
+    deleted = models.BooleanField()
+    def __str__(self):
+        return self.name

@@ -1,0 +1,177 @@
+.coachesMainDiv {
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+}
+
+.coachesLandingPage {
+	width: 80%;
+	height: 12rem;
+	margin: auto;
+}
+
+.coachesContainer {
+	margin-top: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.coachesContainer h3 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-style: bold;
+	font-size: 6.88rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.coachesDetail {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+
+.coachesContainerTitle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.coachesContainerTitle h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-transform: uppercase;
+}
+
+.coachesListContainer {
+	width: 60%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+
+.coachesListTitle {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.coachesListTitle h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.1.563rem;
+	text-transform: uppercase;
+}
+
+.coachesSpecificInfo {
+	display: flex;
+	gap: 2.5rem;
+}
+
+.coachesInfo {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.coachesInfo h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-transform: uppercase;
+}
+
+.coachesInfo p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+}
+.coachesImage {
+	width: 398px;
+	height: 260px;
+	background-color: black;
+}
+
+@media (max-width: 991px) {
+	.coachesLandingPage {
+		height: 8rem;
+	}
+
+	.coachesMainDiv {
+		gap: 2.5rem;
+	}
+
+	.coachesContainer h3 {
+		font-size: 2.813rem;
+	}
+
+	.coachesListContainer {
+		width: 90%;
+		margin: auto;
+	}
+	.coachesSpecificInfo {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch; /* Ensure both items stretch to match height */
+		max-width: 100%;
+	}
+
+	.coachesInfo {
+		flex: 1 1 auto;
+		max-width: 100%;
+		padding-left: 10px;
+	}
+
+	.coachesImage {
+		width: 480px;
+		height: 183px;
+		background-color: black;
+	}
+}
+
+@media (max-width: 450px) {
+	.coachesLandingPage {
+		height: 8rem;
+	}
+
+	.coachesMainDiv {
+		gap: 2.5rem;
+	}
+
+	.coachesContainer h3 {
+		font-size: 2.813rem;
+	}
+
+	.coachesListContainer {
+		width: 90%;
+		margin: auto;
+	}
+	.coachesSpecificInfo {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch; /* Ensure both items stretch to match height */
+		max-width: 100%;
+	}
+
+	/* .coachesInfo {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	} */
+
+	.coachesInfo {
+		flex: 1 1 auto;
+		max-width: 100%;
+		padding-left: 10px;
+	}
+
+	.coachesImage {
+		width: 100%;
+		height: 183px;
+		background-color: black;
+	}
+}

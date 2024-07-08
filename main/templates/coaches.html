@@ -1,0 +1,39 @@
+{% extends "base.html" %} {%load static%}{% block content %}
+<div class="coachesMainDiv">
+	<div class="coachesLandingPage">
+		<div class="coachesContainer">
+			<h3>Coaches</h3>
+		</div>
+	</div>
+
+	<div class="coachesDetail">
+		<div class="coachesContainerTitle">
+			<h4>Meet Our Coaches</h4>
+		</div>
+	</div>
+
+	<div class="coachesListContainer">
+		<div class="coachesListTitle">
+			<h4>Coaches</h4>
+		</div>
+
+		{% for coach in coaches %}
+
+		<div class="coachesSpecificInfo">
+			<div
+				class="coachesImage"
+				id="coachesImage{{ forloop.counter }}"
+				data-original-url="{{ coach.image.url }}"
+				style="background-image: url('{{ coach.image.url }}'); background-size: cover; background-position: center;"
+			></div>
+
+			<div class="coachesInfo">
+				<h4>{{ coach.name }}</h4>
+				<p>{{ coach.bio }}</p>
+				<p>{{ coach.stats }}</p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
