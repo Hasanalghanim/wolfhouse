@@ -1,7 +1,7 @@
 .coachesMainDiv {
 	display: flex;
 	flex-direction: column;
-	gap: 5rem;
+	gap: 2.5rem;
 }
 
 .coachesLandingPage {
@@ -45,6 +45,34 @@
 	text-transform: uppercase;
 }
 
+.coachTabs {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.coachTabs button {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-size: 1rem;
+	height: 2.56rem;
+	width: 5rem;
+	background-color: black;
+	color: white;
+	transition-duration: 0.4s;
+	border-radius: 1.25rem;
+}
+.coachTabs button:hover {
+	background-color: transparent;
+	color: Black;
+}
+.coachTabs .activeTab {
+	background-color: transparent;
+	color: black;
+}
 .coachesListContainer {
 	width: 60%;
 	margin: auto;
@@ -84,7 +112,12 @@
 	font-size: 1.563rem;
 	text-transform: uppercase;
 }
-
+.coachesInfo h5 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 600;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+}
 .coachesInfo p {
 	font-family: 'Barlow Condensed', sans-serif;
 	font-weight: 400;
