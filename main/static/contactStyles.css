@@ -59,11 +59,11 @@
 	gap: 1rem;
 	width: 12.75rem;
 	height: 16.25rem;
-	border: 1px solid black;
-	background-color: black;
+	border: 1px solid #222222;
+	background-color: #222222;
 	padding-top: 0.813rem;
 	padding-bottom: 0.813rem;
-	border: 1px solid black;
+	border: 1px solid #222222;
 	border-radius: 15px;
 }
 

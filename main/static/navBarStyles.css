@@ -73,7 +73,7 @@ body {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: black;
+		color: #222222;
 		text-align: center;
 		text-decoration: none;
 	}
@@ -89,11 +89,11 @@ body {
 		border-radius: 1.25rem;
 		white-space: nowrap;
 		background-color: transparent;
-		border-color: black;
+		border-color: #222222;
 		transition-duration: 0.4s;
 	}
 	.join-btn:hover {
-		background-color: black;
+		background-color: #222222;
 		color: white;
 	}
 }
@@ -164,7 +164,7 @@ body {
 		background-color: #fef102;
 		transition-duration: 0.4s;
 		border: 0px;
-		color: black;
+		color: #222222;
 	}
 	.navBarJoinBtn {
 		display: none;
@@ -179,10 +179,10 @@ body {
 		white-space: nowrap;
 
 		background-color: white;
-		border-color: black;
+		border-color: #222222;
 		transition-duration: 0.4s;
 		border: 0px;
-		color: black;
+		color: #222222;
 	}
 
 	.menu {
