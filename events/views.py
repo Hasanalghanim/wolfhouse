@@ -1,10 +1,6 @@
-import json
-import uuid
 
-from django.conf import settings
-from django.http import JsonResponse
 from django.shortcuts import render
-from square.client import Client
+
 
 from .forms import ParticipantForm
 from .models import Event
