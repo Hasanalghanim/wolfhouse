@@ -1,0 +1,195 @@
+{% extends "base.html" %} {%load static%}{% block content %}
+<style></style>
+<div class="eventsMainDiv">
+	<div class="eventSummary">
+		{% for event in event%}
+
+		<div class="eventSummaryContainer">
+			<div class="eventSummaryContainerImageContainer">
+				<img class="eventSummaryContainerImage" src="{{event.image.url}}" />
+			</div>
+
+			<div class="eventSummaryDetail">
+				<div class="eventSummaryDetailGroup">
+					<span>Event Name</span>
+					<strong>{{event.title}}</strong>
+				</div>
+
+				<div class="eventSummaryDetailGroup">
+					<span>Venue</span>
+					<strong>{{event.location}}</strong>
+				</div>
+
+				<div class="eventSummaryDetailGroup">
+					<span>Location</span>
+					<strong>{{event.city}}</strong>
+				</div>
+
+				<div class="eventSummaryDetailGroup">
+					<span>Event Date</span>
+					<strong>{{event.date}}</strong>
+				</div>
+
+				<div class="eventSummaryDetailGroup">
+					<span>Cost</span>
+					<strong>${{event.registration_fee}}</strong>
+				</div>
+
+				<button
+					id="openDialogButton"
+					data-toggle="modal"
+					data-target="#exampleModal"
+					style="
+						padding: 10px 20px;
+						font-size: 1rem;
+						background-color: #3498db;
+						color: white;
+						border: none;
+						border-radius: 5px;
+						cursor: pointer;
+					"
+				>
+					Register
+				</button>
+
+				<div
+					class="modal fade"
+					id="exampleModal"
+					tabindex="-1"
+					role="dialog"
+					aria-labelledby="exampleModalLabel"
+					aria-hidden="true"
+				>
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Register Percipient</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form action="/events/fight-card/{{event.id}}" method="post">
+								{% csrf_token %} <input hidden name="event" value="{{event.id}}" required />
+								<div class="dialogContent">
+									<div class="container">
+										<div class="row mt-1 mt-1">
+											<label for="first_name" class="form-label col-sm">First Name</label>
+											<input
+												type="text"
+												class="form-control col-sm"
+												id="first_name"
+												placeholder="First Name"
+												name="first_name"
+												required
+											/>
+										</div>
+										<div class="row mt-1">
+											<label for="last_name" class="form-label col-sm">Last Name</label>
+											<input
+												type="text"
+												class="form-control col-sm"
+												id="last_name"
+												placeholder="Last Name"
+												name="last_name"
+												required
+											/>
+										</div>
+
+										<div class="row mt-1">
+											<label for="gender-select" class="form-label col-sm">Gender</label>
+
+											<select name="gender" id="gender-select" class="custom-select col-sm">
+												<option selected>Please choose an option</option>
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+											</select>
+										</div>
+										<div class="row mt-1">
+											<label for="date_of_birth" class="col-sm">Date Of Birth</label>
+											<input
+												type="date"
+												class="form-control col-sm"
+												id="date_of_birth"
+												placeholder="Date Of Birth"
+												name="date_of_birth"
+												required
+											/>
+										</div>
+
+										<div class="row mt-1">
+											<label for="school_name" class="form-label col-sm">School Name</label>
+											<input
+												type="text"
+												class="form-control col-sm"
+												id="school_name"
+												placeholder="School Name"
+												name="school_name"
+												required
+											/>
+										</div>
+										<div class="row mt-1">
+											<label for="email_value" class="form-label col-sm">Email</label>
+
+											<input
+												type="email"
+												class="form-control col-sm"
+												id="email_value"
+												placeholder="Email"
+												name="email"
+												required
+											/>
+										</div>
+
+										<div class="row mt-1">
+											<label for="experience" class="form-label col-sm">Years of Training</label>
+
+											<input
+												type="number"
+												class="form-control col-sm"
+												id="experience"
+												placeholder="Years of Training"
+												name="years_of_training"
+												required
+											/>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button id="card-button" type="submit" class="btn btn-primary">Register</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
+	</div>
+	{% for error in errors%}
+	<div>{{error}}</div>
+	{% endfor %}
+
+	<ul class="nav nav-tabs">
+		{% comment %}
+		<li class="active"><a data-toggle="tab" href="#home">Extra Detail</a></li>
+		{% endcomment %}
+		<li><a data-toggle="tab" href="#menu1">Participants </a></li>
+	</ul>
+
+	<div class="tab-content py-0">
+		{% comment %}
+		<div id="home" class="tab-panel fade">
+			<h3>HOME</h3>
+			<p>Some content.</p>
+		</div>
+		{% endcomment %}
+		<div id="menu1" class="tab-panel fade">
+			<h3>Participants</h3>
+			<p>A list of Percipient will be populated here.</p>
+		</div>
+	</div>
+</div>
+<script></script>
+{% endblock %}

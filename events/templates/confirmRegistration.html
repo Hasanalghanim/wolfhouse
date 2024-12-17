@@ -1,0 +1,114 @@
+{% extends "base.html" %} {%load static%}{% block content %}
+
+<div class="eventsMainDiv" style="gap: 0.5rem">
+	{% for event in event%}
+	<div class="alert alert-success" role="alert">
+		<div class="d-flex align-items-center">
+			<span>Thank you for Registering for our event:</span>
+
+			<h4 class="mx-2 my-0">{{event.title}}</h4>
+		</div>
+	</div>
+
+	<div class="alert alert-secondary" role="alert">
+		<div class="d-flex flex-column">
+			<h5>Click Below to pay the registrations fee.</h5>
+			<span>Your registration will not be valid UNLESS the fees have been paid.</span>
+			<span>Please use the same name and email that you used to register in the previous page when you pay.</span>
+		</div>
+	</div>
+
+	<div>
+		<div
+			style="
+				overflow: auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				align-items: center;
+				width: 259px;
+				background: #ffffff;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				box-shadow: -2px 10px 5px rgba(0, 0, 0, 0);
+				border-radius: 10px;
+				font-family: SQ Market, SQ Market, Helvetica, Arial, sans-serif;
+			"
+		>
+			<img
+				src="https://items-images-production.s3.us-west-2.amazonaws.com/files/ba20ea9539688c013727e9a3d600f41ddcd15dd6/original.png"
+				alt="Tournament registration"
+				onerror="this.style.display='none'"
+				style="width: 100%"
+			/>
+			<div style="padding: 20px">
+				<p style="font-size: 18px; line-height: 20px; font-weight: 600">$60.00</p>
+				<a
+					target="_blank"
+					data-url="https://square.link/u/7zAumu38?src=embd"
+					href="https://square.link/u/7zAumu38?src=embed"
+					style="
+						display: inline-block;
+						font-size: 18px;
+						line-height: 48px;
+						height: 48px;
+						color: #ffffff;
+						min-width: 212px;
+						background-color: #222222;
+						text-align: center;
+						box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+						border-radius: 6px;
+					"
+					>Pay now</a
+				>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+<script>
+	function showCheckoutWindow(e) {
+		e.preventDefault();
+
+		const url = document.getElementById('embedded-checkout-modal-checkout-button').getAttribute('data-url');
+		const title = 'Square Payment Links';
+
+		// Some platforms embed in an iframe, so we want to top window to calculate sizes correctly
+		const topWindow = window.top ? window.top : window;
+
+		// Fixes dual-screen position                                Most browsers          Firefox
+		const dualScreenLeft = topWindow.screenLeft !== undefined ? topWindow.screenLeft : topWindow.screenX;
+		const dualScreenTop = topWindow.screenTop !== undefined ? topWindow.screenTop : topWindow.screenY;
+
+		const width = topWindow.innerWidth
+			? topWindow.innerWidth
+			: document.documentElement.clientWidth
+			? document.documentElement.clientWidth
+			: screen.width;
+		const height = topWindow.innerHeight
+			? topWindow.innerHeight
+			: document.documentElement.clientHeight
+			? document.documentElement.clientHeight
+			: screen.height;
+
+		const h = height * 0.75;
+		const w = 500;
+
+		const systemZoom = width / topWindow.screen.availWidth;
+		const left = (width - w) / 2 / systemZoom + dualScreenLeft;
+		const top = (height - h) / 2 / systemZoom + dualScreenTop;
+		const newWindow = window.open(
+			url,
+			title,
+			`scrollbars=yes, width=${w / systemZoom}, height=${h / systemZoom}, top=${top}, left=${left}`
+		);
+
+		if (window.focus) newWindow.focus();
+	}
+
+	// This overrides the default checkout button click handler to show the embed modal
+	// instead of opening a new tab with the given link url
+	document.getElementById('embedded-checkout-modal-checkout-button').addEventListener('click', function (e) {
+		showCheckoutWindow(e);
+	});
+</script>
+{% endblock %}

@@ -61,6 +61,133 @@
 	border: 0px;
 }
 
+/* Container for all events */
+.eventContainer {
+	margin-top: 5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	margin: auto;
+	padding: 5rem;
+	gap: 2rem;
+}
+
+/* Events title styling */
+.eventsTitle h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-align: center;
+	text-transform: uppercase;
+	color: #222222;
+}
+
+/* Group container for event cards */
+.groupEventContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 2rem;
+	border-bottom: 1px solid #222222;
+}
+
+/* Single event card container */
+.singleEventContainer {
+	height: 18rem;
+	width: 18rem;
+	position: relative;
+}
+
+/* Event image styling */
+.singleEventImage {
+	position: relative;
+	width: 100%;
+	min-height: 40%;
+	background-color: white;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: 1;
+}
+
+/* Image cover overlay */
+.singleEventImageCover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0;
+	z-index: 2;
+	transition: opacity 0.3s;
+}
+
+/* Event details link styling */
+.singleEventContainer a {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-align: left;
+	text-transform: uppercase;
+	color: #222222;
+}
+
+/* Event details paragraph styling */
+.singleEventContainer p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-size: 1rem;
+	text-align: left;
+	text-transform: capitalize;
+	color: #222222;
+	margin-bottom: 0;
+}
+
+.eventMoreInfoBtn {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	z-index: 4; /* Ensure it appears above other elements */
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.3s, opacity 0.3s;
+}
+
+/* Hover effect for button visibility */
+.singleEventImage:hover .eventMoreInfoBtn {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* More info button link styling */
+.eventMoreInfoBtn a {
+	color: #222222;
+}
+
+/* Button inside the more info container */
+.eventMoreInfoBtn-btn {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-size: 1rem;
+	height: 2.56rem;
+	width: 9.63rem;
+	border-radius: 1.25rem;
+	white-space: nowrap;
+	background-color: yellow;
+	color: #222222;
+	border: none;
+	transition: all 0.4s;
+}
+.singleEventImage:hover .singleEventImageCover {
+	opacity: 0.5;
+}
+
+/* .eventMoreInfoBtn {
+} */
 .verticalBarContainer {
 	margin-top: 2.5rem;
 	margin-bottom: 2.5rem;
@@ -227,8 +354,7 @@
 	font-size: xx-large;
 	background-color: transparent;
 }
-.MembershipGroupContainer
-	.specificMembershipContainer:not(:last-child) {
+.MembershipGroupContainer .specificMembershipContainer:not(:last-child) {
 	border-bottom: 1px solid #000;
 }
 .membershipAdditionalInfo {
@@ -300,6 +426,30 @@
 
 	.callToActionContainer h3 {
 		font-size: 2.813rem;
+	}
+	.eventContainer {
+		margin-top: 5rem;
+		display: flex;
+		width: 100%;
+		margin: auto;
+		justify-content: center;
+		padding: 0rem;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+	}
+	.groupEventContainer {
+		display: flex;
+		width: 80%;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+		border-bottom: solid #222222 1px;
+	}
+	.singleEventContainer {
+		height: 18rem;
+		width: 100%;
 	}
 
 	.secondCTAContainer {

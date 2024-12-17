@@ -1,0 +1,123 @@
+.eventsMainDiv {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+.eventSummary {
+	border-radius: 10px;
+	width: 100%;
+}
+.eventSummaryContainer {
+	display: flex;
+	height: 100%;
+	background-color: #222222;
+	align-items: center;
+	gap: 2rem;
+	border-radius: 20px;
+}
+
+.eventSummaryContainerImageContainer {
+	width: 80%;
+}
+.eventSummaryContainerImage {
+	width: 100%;
+	height: auto;
+	max-width: 100%;
+	object-fit: contain;
+	box-shadow: 0px 25px 50px rgba(69, 65, 47, 0.5);
+	border-radius: 10px;
+}
+
+.eventSummaryDetail {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.eventSummaryDetailGroup {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	gap: 0.1rem;
+}
+.eventSummaryDetailGroup span {
+	color: #bbbbbb;
+	text-transform: uppercase;
+}
+.eventSummaryDetailGroup strong {
+	font-weight: bold;
+	color: #dddddd;
+	line-height: 1.2rem;
+}
+
+@media (max-width: 1080px) {
+	.eventSummaryContainer {
+		flex-direction: column;
+	}
+	.eventSummaryContainerImageContainer {
+		width: 100%;
+	}
+	.eventSummaryContainerImage {
+		width: 100%;
+		height: auto;
+		max-width: 100%;
+		object-fit: cover;
+	}
+
+	.eventSummaryDetail {
+		display: flex;
+		width: 90%;
+		flex-direction: row;
+		padding-bottom: 1rem;
+		justify-content: space-between;
+	}
+
+	.eventSummaryDetailGroup {
+		display: flex;
+		align-items: start;
+		justify-content: center;
+		gap: 0.1rem;
+	}
+}
+.dialogContent {
+	width: 80%;
+	margin: auto;
+}
+@media (max-width: 720px) {
+	.eventsMainDiv {
+		width: 90%;
+	}
+	.eventSummaryContainerImage {
+		width: 100%;
+		height: auto;
+		max-width: 100%;
+		object-fit: cover;
+	}
+
+	.eventSummaryDetail {
+		display: flex;
+		flex-direction: column;
+		width: 80%;
+		gap: 0.2rem;
+	}
+
+	.eventSummaryDetailGroup {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+	.eventSummaryDetailGroup span {
+		width: 50%;
+	}
+	.eventSummaryDetailGroup strong {
+		width: 50%;
+	}
+}

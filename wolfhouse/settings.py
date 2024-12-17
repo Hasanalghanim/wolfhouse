@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4=67-lgx*#f=qosm)ov2r(i2tvzm07qd)tqo8w9gn__tbai29e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wolfhousemma.com','*']
+ALLOWED_HOSTS = ['wolfhousemma.com','*','https://0874-2001-56a-f02c-9800-71cc-8c75-6b07-a99f.ngrok-free.app']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'webhook'
+    'webhook',
+    'events'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,25 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://sandbox.web.squarecdn.com",
+    "https://web.squarecdn.com",
+    'https://0874-2001-56a-f02c-9800-71cc-8c75-6b07-a99f.ngrok-free.app'
+]
+
+INSTALLED_APPS += ['corsheaders']
+MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
+
+
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
+SQUARE_ACCESS_TOKEN = "EAAAl8FT_uJ-q9-3QkFWms5bvt0FqP9Iz6T-4KIn6MEwMpkmkj4jm4OmcxcTV5Mw"
+SQUARE_APPLICATION_ID = "sandbox-sq0idb-9nCbWsoQ_pUThDbwu9yizQ"
+SQUARE_LOCATION_ID = "L6QW467VD85V7"
+
+
 
 ROOT_URLCONF = 'wolfhouse.urls'
 
@@ -77,19 +97,19 @@ WSGI_APPLICATION = 'wolfhouse.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'myappdb',
-            'USER': 'hasan',
-            'PASSWORD': 'Nadiasimmer1',
-            'HOST': 'hasanalghanim-3935.postgres.pythonanywhere-services.com',
-            'PORT': 13935
-,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+#     'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'myappdb',
+#             'USER': 'hasan',
+#             'PASSWORD': 'Nadiasimmer1',
+#             'HOST': 'hasanalghanim-3935.postgres.pythonanywhere-services.com',
+#             'PORT': 13935
+# ,
+#     }
 }
 
 
@@ -117,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Edmonton'
 
 USE_I18N = True
 

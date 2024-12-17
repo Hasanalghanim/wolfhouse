@@ -2,17 +2,11 @@
 function menuToggle() {
 	document.getElementById('menu').classList.toggle('show');
 	document.body.classList.toggle('menu-open');
-	document
-		.getElementById('navbar-toggle')
-		.classList.toggle('change');
+	document.getElementById('navbar-toggle').classList.toggle('change');
 }
 function displayMembershipInfo(button) {
-	const additionalInfo =
-		button.parentElement.nextElementSibling;
-	if (
-		additionalInfo.style.display === 'none' ||
-		additionalInfo.style.display === ''
-	) {
+	const additionalInfo = button.parentElement.nextElementSibling;
+	if (additionalInfo.style.display === 'none' || additionalInfo.style.display === '') {
 		additionalInfo.style.display = 'flex';
 		button.textContent = '-';
 	} else {
@@ -22,19 +16,14 @@ function displayMembershipInfo(button) {
 }
 
 function displayMembershipInfoFromDiv(container) {
-	const additionalInfo = container.querySelector(
-		'.membershipAdditionalInfo'
-	);
-	const plusMinus = container.querySelector(
-		'#specificMembershipSectionPlusMinus'
-	);
+	const additionalInfo = container.querySelector('.membershipAdditionalInfo');
+	const plusMinus = container.querySelector('#specificMembershipSectionPlusMinus');
 
 	if (!additionalInfo || !plusMinus) {
 		console.error('Required elements not found.');
 		return;
 	}
-	const currentDisplay =
-		window.getComputedStyle(additionalInfo).display;
+	const currentDisplay = window.getComputedStyle(additionalInfo).display;
 	if (currentDisplay === 'none') {
 		additionalInfo.style.display = 'flex';
 		plusMinus.textContent = '-';
@@ -45,8 +34,7 @@ function displayMembershipInfoFromDiv(container) {
 }
 
 function setFooterYear() {
-	const yearElement =
-		document.getElementById('footer-year');
+	const yearElement = document.getElementById('footer-year');
 	const currentYear = new Date().getFullYear();
 	yearElement.textContent = currentYear;
 }
@@ -54,17 +42,11 @@ window.onload = setFooterYear;
 
 document.addEventListener('DOMContentLoaded', function () {
 	function updateBackgroundImages() {
-		const containers = document.querySelectorAll(
-			'.specificTrainingContainer'
-		);
+		const containers = document.querySelectorAll('.specificTrainingContainer');
 
 		containers.forEach((container) => {
-			const originalUrl = container.getAttribute(
-				'data-original-url'
-			);
-			const croppedUrl = container.getAttribute(
-				'data-cropped-url'
-			);
+			const originalUrl = container.getAttribute('data-original-url');
+			const croppedUrl = container.getAttribute('data-cropped-url');
 
 			if (window.innerWidth <= 800) {
 				container.style.backgroundImage = `url(${originalUrl})`;
@@ -75,16 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function updateLandingPageImages() {
-		const backgrounds = document.querySelectorAll(
-			'.landingPageBackgroundPhoto'
-		);
+		const backgrounds = document.querySelectorAll('.landingPageBackgroundPhoto');
 		backgrounds.forEach((background) => {
-			const originalUrl = background.getAttribute(
-				'data-original-url'
-			);
-			const croppedUrl = background.getAttribute(
-				'data-cropped-url'
-			);
+			const originalUrl = background.getAttribute('data-original-url');
+			const croppedUrl = background.getAttribute('data-cropped-url');
 
 			if (window.innerWidth <= 800) {
 				background.style.backgroundImage = `url(${originalUrl})`;
@@ -93,42 +69,46 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	}
+
+	function updateEventsImages() {
+		const events = document.querySelectorAll('.singleEventImage');
+		events.forEach((background) => {
+			const originalUrl = background.getAttribute('data-original-url');
+			const croppedUrl = background.getAttribute('data-cropped-url');
+
+			if (window.innerWidth <= 800) {
+				background.style.backgroundImage = `url(${originalUrl})`;
+			} else {
+				background.style.backgroundImage = `url(${croppedUrl})`;
+			}
+		});
+	}
+
 	// Update background images on initial load
 	updateBackgroundImages();
 	updateLandingPageImages();
+	updateEventsImages();
 
 	// Update background images on window resize
-	window.addEventListener(
-		'resize',
-		updateBackgroundImages,
-		updateLandingPageImages
-	);
+	window.addEventListener('resize', updateBackgroundImages, updateLandingPageImages, updateEventsImages);
 });
 
 function copyToClipboard() {
 	// Get the text field
 
 	// Copy the text inside the text field
-	navigator.clipboard.writeText(
-		'11507 120 St NW #200 Edmonton, AB T5G 2Y2'
-	);
+	navigator.clipboard.writeText('11507 120 St NW #200 Edmonton, AB T5G 2Y2');
 
 	// Alert the copied text
-	alert(
-		'Copied the text: ' +
-			'11507 120 St NW #200 Edmonton, AB T5G 2Y2'
-	);
+	alert('Copied the text: ' + '11507 120 St NW #200 Edmonton, AB T5G 2Y2');
 }
 
-document
-	.getElementById('locationCopyBtn')
-	.addEventListener('click', function () {
-		copyToClipboard();
-	});
+document.getElementById('locationCopyBtn').addEventListener('click', function () {
+	copyToClipboard();
+});
 
 function copyToClipboard() {
-	const textToCopy =
-		'11507 120 St NW #200 Edmonton, AB T5G 2Y2';
+	const textToCopy = '11507 120 St NW #200 Edmonton, AB T5G 2Y2';
 
 	// Check if the clipboard API is available
 	if (navigator.clipboard) {
@@ -153,10 +133,7 @@ function copyToClipboard() {
 			document.execCommand('copy');
 			alert('Copied the text: ' + textToCopy);
 		} catch (err) {
-			console.error(
-				'Fallback: Oops, unable to copy',
-				err
-			);
+			console.error('Fallback: Oops, unable to copy', err);
 			alert('Failed to copy text.');
 		}
 		document.body.removeChild(textArea);

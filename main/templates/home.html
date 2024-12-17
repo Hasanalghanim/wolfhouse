@@ -12,13 +12,8 @@
 			<div class="callToActionContainer">
 				<h3>Unleash Your <br />Power</h3>
 				<div class="membershipBtnContainer">
-					<a
-						href="https://wolfhouse-30.maonrails.com/login"
-						target="_blank"
-					>
-						<button type="button" class="member-btn">
-							MEMBER LOGIN
-						</button></a
+					<a href="https://wolfhouse-30.maonrails.com/login" target="_blank">
+						<button type="button" class="member-btn">MEMBER LOGIN</button></a
 					>
 				</div>
 			</div>
@@ -27,102 +22,115 @@
 		<div class="backgroundPhotoCover"></div>
 	</div>
 	{% endfor %}
-</div>
-
-<div class="verticalBarContainer">
-	<div class="verticalBar"></div>
-</div>
-
-<div class="secondCTAContainer">
-	<h3>Fitness For Everyone</h3>
-	<p>
-		At Wolfhouse, fitness is for everyone, from beginners
-		to experts. Our gym offers state-of-the-art equipment,
-		diverse classes, and supportive trainers. Join us to
-		unleash your potential and achieve your fitness goals.
-	</p>
-</div>
-
-<div class="trainingContainer">
-	<h3>Training</h3>
-	<div class="trainingWrapper">
-		{% for training in trainings %}
-		<div
-			id="specificTrainingContainer{{ forloop.counter }}"
-			class="specificTrainingContainer"
-			data-original-url="{{ training.image.url }}"
-			data-cropped-url="{{ training.croppedImage.url }}"
-		>
-			<div class="specificTrainingContainerCover">
-				<div class="sectionTitle">
-					<h4>{{ training.title}}</h4>
-				</div>
-			</div>
+	<div class="eventContainer">
+		<div class="eventsTitle">
+			<h4>Upcoming Events</h4>
 		</div>
-
-		{% endfor %}
-	</div>
-</div>
-<div class="starDivider">
-	{% load static %}
-	<img
-		src="{% static 'Icons\star (3).png' %}"
-		height="60"
-		width="60"
-	/>
-</div>
-
-<div class="membershipContainer">
-	<h3>Memberships</h3>
-
-	<div class="MembershipGroupContainer">
-		{% for membership in memberships %}
-
-		<div
-			class="specificMembershipContainer"
-			onclick="displayMembershipInfoFromDiv(this)"
-		>
-			<div class="specificMembershipSectionTitle">
-				<h4>{{ membership.title}}</h4>
-				<h5 id="specificMembershipSectionPlusMinus">
-					+
-				</h5>
-			</div>
-
-			<div class="membershipAdditionalInfo">
-				<div class="membershipAdditionalInfoCosting">
-					<p>
-						<strong>
-							${{ membership.monthly }}
-						</strong>
-						/mo
-					</p>
-				</div>
-				{% if membership.signupFee %}
-				<span>
-					1 year contract - One Time signup fee of
-					$126.00</span
+		<div class="groupEventContainer">
+			{% for event in events %}
+			<div class="singleEventContainer">
+				<div
+					class="singleEventImage"
+					id="singleEventImage{{ forloop.counter }}"
+					data-original-url="{{event.image.url}}"
+					data-cropped-url="{{event.croppedImage.url}}"
 				>
-				{% endif %} {% if membership.yearly %}
-				<div class="membershipAdditionalInfoCosting">
-					<p>
-						or
-						<strong>${{ membership.yearly }}</strong
-						>/yr
-					</p>
+					<div class="eventMoreInfoBtn">
+						<a href={% url 'eventDetail' event_id=event.id %} >
+							<button type="button" class="eventMoreInfoBtn-btn">More Info</button></a
+						>
+					</div>
+					<div class="singleEventImageCover" id="singleEventImageCover{{ forloop.counter }}"></div>
 				</div>
-				{% endif %}
-				<span>Prices includes tax.</span>
+				<div class="singleEventDetail">
+					<a href={% url 'eventDetail' event_id=event.id %}>{{event.title}}</a>
 
-				<div class="membershipAdditionalInfoExtraInfo">
-					<span
-						>{{ membership.extraDetail|safe }}</span
-					>
+					
+					<p>{{event.date}}</p>
+					<p>{{event.location}}</p>
+					<p>{{event.city}}</p>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
-		{% endfor %}
 	</div>
-</div>
 
-{% endblock %}
+	<div class="verticalBarContainer">
+		<div class="verticalBar"></div>
+	</div>
+
+	<div class="secondCTAContainer">
+		<h3>Fitness For Everyone</h3>
+		<p>
+			At Wolfhouse, fitness is for everyone, from beginners to experts. Our gym offers state-of-the-art equipment,
+			diverse classes, and supportive trainers. Join us to unleash your potential and achieve your fitness goals.
+		</p>
+	</div>
+
+	<div class="trainingContainer">
+		<h3>Training</h3>
+		<div class="trainingWrapper">
+			{% for training in trainings %}
+			<div
+				id="specificTrainingContainer{{ forloop.counter }}"
+				class="specificTrainingContainer"
+				data-original-url="{{ training.image.url }}"
+				data-cropped-url="{{ training.croppedImage.url }}"
+			>
+				<div class="specificTrainingContainerCover">
+					<div class="sectionTitle">
+						<h4>{{ training.title}}</h4>
+					</div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
+	</div>
+	<div class="starDivider">
+		{% load static %}
+		<img src="{% static 'Icons\star (3).png' %}" height="60" width="60" />
+	</div>
+
+	<div class="membershipContainer">
+		<h3>Memberships</h3>
+
+		<div class="MembershipGroupContainer">
+			{% for membership in memberships %}
+
+			<div class="specificMembershipContainer" onclick="displayMembershipInfoFromDiv(this)">
+				<div class="specificMembershipSectionTitle">
+					<h4>{{ membership.title}}</h4>
+					<h5 id="specificMembershipSectionPlusMinus">+</h5>
+				</div>
+
+				<div class="membershipAdditionalInfo">
+					<div class="membershipAdditionalInfoCosting">
+						<p>
+							<strong> ${{ membership.monthly }} </strong>
+							/mo
+						</p>
+					</div>
+					{% if membership.signupFee %}
+					<span> 1 year contract - One Time signup fee of $126.00</span>
+					{% endif %} {% if membership.yearly %}
+					<div class="membershipAdditionalInfoCosting">
+						<p>
+							or
+							<strong>${{ membership.yearly }}</strong>/yr
+						</p>
+					</div>
+					{% endif %}
+					<span>Prices includes tax.</span>
+
+					<div class="membershipAdditionalInfoExtraInfo">
+						<span>{{ membership.extraDetail|safe }}</span>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	{% endblock %}
+</div>
