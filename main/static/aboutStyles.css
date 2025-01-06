@@ -143,3 +143,27 @@
 	text-align: center;
 	text-transform: capitalize;
 }
+@media (max-width: 991px) {
+	.aboutUsLandingPage {
+		width: 90%;
+		gap: 2.5rem;
+		margin-top: 5rem;
+	}
+	.aboutUsContainer h3 {
+		font-size: 6rem;
+	}
+	.missionAndGoalContainer {
+		display: flex;
+		flex-direction: column;
+		gap: 10%;
+	}
+
+	.aboutUsContent p {
+		width: 100%;
+	}
+	.aboutUsBulletPoints {
+		flex-direction: column;
+		width: 90%;
+		margin: auto;
+	}
+}
