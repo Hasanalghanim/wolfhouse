@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4=67-lgx*#f=qosm)ov2r(i2tvzm07qd)tqo8w9gn__tbai29e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wolfhousemma.com','*','https://0874-2001-56a-f02c-9800-71cc-8c75-6b07-a99f.ngrok-free.app']
+ALLOWED_HOSTS = ['wolfhousemma.com','www.wolfhousemma.com']
 
 
 # Application definition
@@ -97,19 +97,19 @@ WSGI_APPLICATION = 'wolfhouse.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'myappdb',
+            'USER': 'hasan',
+            'PASSWORD': 'Nadiasimmer1',
+            'HOST': 'hasanalghanim-3935.postgres.pythonanywhere-services.com',
+            'PORT': 13935
+,
     }
-#     'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'myappdb',
-#             'USER': 'hasan',
-#             'PASSWORD': 'Nadiasimmer1',
-#             'HOST': 'hasanalghanim-3935.postgres.pythonanywhere-services.com',
-#             'PORT': 13935
-# ,
-#     }
 }
 
 
