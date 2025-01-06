@@ -1,0 +1,145 @@
+.aboutUsLandingPage {
+	width: 80%;
+	margin: auto;
+	margin-bottom: 10rem;
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+	margin-top: 5rem;
+}
+.aboutUsContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.aboutUsContainer h3 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-style: bold;
+	font-size: 6.88rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.aboutUsContainer h5 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: italic;
+	font-size: 2rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.missionAndGoalContainer {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 10%;
+}
+.missionAndGoalContainer div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.missionAndGoalContainer h5 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 2rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.missionAndGoalContainer p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 1rem;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.missionAndGoalImage {
+	width: 80%;
+	margin: auto;
+}
+.missionAndGoalImage img {
+	height: auto;
+	width: 100%;
+	object-fit: contain;
+	box-shadow: 0px 25px 50px rgba(69, 65, 47, 0.2);
+}
+
+.aboutUsContent {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	width: 100%;
+	margin: auto;
+}
+
+.aboutUsContent h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 2.5rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.aboutUsContent h5 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 2rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.aboutUsContent p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 1rem;
+	text-align: center;
+	text-transform: capitalize;
+	width: 75%;
+	margin: auto;
+}
+
+.aboutUsBulletPoints {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10%;
+}
+
+.aboutUsContent li {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 1rem;
+	text-align: start;
+	text-transform: capitalize;
+}
+
+.aboutUsBulletPoints h5 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 2rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.aboutUsBulletPoints p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 1rem;
+	text-align: center;
+	text-transform: capitalize;
+}

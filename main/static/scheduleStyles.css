@@ -9,6 +9,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 5rem;
 }
 
 .scheduleContainer h3 {
@@ -26,6 +27,7 @@
 	margin: auto;
 	box-sizing: border-box;
 	background-color: #222222;
+	margin-top: 5rem;
 }
 
 @media (max-width: 991px) {

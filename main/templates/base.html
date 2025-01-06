@@ -33,6 +33,7 @@
 
 		<link rel="stylesheet" type="text/css" href="{% static 'coachesStyles.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'eventsStyles.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'aboutStyles.css' %}" />
 	</head>
 	<body>
 		<nav class="navbarMain">
@@ -49,6 +50,7 @@
 						<a href="/coaches?Head Coach">Coaches</a>
 						<a href="/schedule">Schedule</a>
 						<a href="/contact">Contact</a>
+						<a href="/about">About Us</a>
 						<a href="https://wolfhouse-30.gymdesk.com/login" target="_blank" class="navBarLoginBtn">
 							<button type="button">LOGIN</button></a
 						>
@@ -64,8 +66,6 @@
 			</div>
 		</nav>
 		{% block content %} {% endblock %}
-
-		<div class="testimonialsContainer"></div>
 
 		<footer class="footerBar">
 			&copy;
