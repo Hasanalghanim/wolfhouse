@@ -9,9 +9,6 @@ class Event(models.Model):
     city = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/')
     croppedImage = models.ImageField(upload_to='images/', blank=True, null=True)
-    payment_url = models.CharField(max_length=500, blank=True, null=True) 
-    view_event = models.BooleanField(default=False) 
-    tournament_event = models.BooleanField(default=False) 
     deleted = models.BooleanField(default=False)
     def __str__(self):
         return self.title
