@@ -12,7 +12,7 @@ class Event(models.Model):
     deleted = models.BooleanField(default=False)
     is_tour = models.BooleanField(default=False)
     is_event = models.BooleanField(default=False)
-    url = models.CharField(max_length=500)
+    url = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.title
