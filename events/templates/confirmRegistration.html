@@ -35,17 +35,17 @@
 			"
 		>
 			<img
-				src="https://items-images-production.s3.us-west-2.amazonaws.com/files/ba20ea9539688c013727e9a3d600f41ddcd15dd6/original.png"
+				src="{{event.image}}"
 				alt="Tournament registration"
 				onerror="this.style.display='none'"
 				style="width: 100%"
 			/>
 			<div style="padding: 20px">
-				<p style="font-size: 18px; line-height: 20px; font-weight: 600">$60.00</p>
+				<p style="font-size: 18px; line-height: 20px; font-weight: 600">{{event.registration_fee}}</p>
 				<a
 					target="_blank"
-					data-url="https://square.link/u/7zAumu38?src=embd"
-					href="https://square.link/u/7zAumu38?src=embed"
+					data-url="{{event.url}}"
+					href="{{event.url}}"
 					style="
 						display: inline-block;
 						font-size: 18px;

@@ -10,6 +10,10 @@ class Event(models.Model):
     image = models.ImageField(upload_to='images/')
     croppedImage = models.ImageField(upload_to='images/', blank=True, null=True)
     deleted = models.BooleanField(default=False)
+    is_tour = models.BooleanField(default=False)
+    is_event = models.BooleanField(default=False)
+    url = models.CharField(max_length=500)
+
     def __str__(self):
         return self.title
     
