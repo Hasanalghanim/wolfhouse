@@ -192,23 +192,22 @@
 	{% endfor %}
 
 	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#home">Rules + Extra Detail</a></li>
+
 		{% comment %}
-		<li class="active"><a data-toggle="tab" href="#home">Extra Detail</a></li>
-		{% endcomment %}
 		<li><a data-toggle="tab" href="#menu1">Participants </a></li>
+		{% endcomment %}
 	</ul>
 
 	<div class="tab-content py-0">
+		<div id="home" class="tab-panel fade">{% for event in event%} {{event.rules|safe}} {% endfor%}</div>
+
 		{% comment %}
-		<div id="home" class="tab-panel fade">
-			<h3>HOME</h3>
-			<p>Some content.</p>
-		</div>
-		{% endcomment %}
 		<div id="menu1" class="tab-panel fade">
 			<h3>Participants</h3>
 			<p>A list of Percipient will be populated here.</p>
 		</div>
+		{% endcomment %}
 	</div>
 </div>
 <script></script>

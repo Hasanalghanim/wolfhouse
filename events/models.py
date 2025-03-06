@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Event(models.Model): 
@@ -13,6 +14,7 @@ class Event(models.Model):
     is_tour = models.BooleanField(default=False)
     is_event = models.BooleanField(default=False)
     url = models.CharField(max_length=500, blank=True, null=True)
+    rules = RichTextField(default="No rules specified")
 
     def __str__(self):
         return self.title
