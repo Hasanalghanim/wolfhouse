@@ -96,10 +96,16 @@ WSGI_APPLICATION = 'wolfhouse.wsgi.application'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'Full',  # You can choose 'Basic', 'Full', etc.
+        'toolbar': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],  # Ensure these are included
+            ['Link', 'Unlink'],
+            ['Undo', 'Redo'],
+            ['Source'],  # Allows raw HTML editing
+        ],
         'width': '100%',
         'height': 300,
-    },
+    }
 }
 
 # Database
