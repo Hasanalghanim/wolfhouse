@@ -1,3 +1,14 @@
+.nav-pills .nav-link {
+	background-color: white !important; /* Default white background */
+	color: black !important; /* Default black text */
+	border: 1px solid black; /* Add border for better visibility */
+}
+
+.nav-pills .nav-link.active {
+	background-color: black !important; /* Black background when active */
+	color: white !important; /* White text when active */
+}
+
 .eventsMainDiv {
 	width: 80%;
 	margin: auto;

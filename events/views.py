@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 
 from .forms import ParticipantForm
-from .models import Event
+from .models import Event,  Participant
 
 #TODO
 
@@ -15,6 +15,9 @@ from .models import Event
 # Create your views here.
 def eventDetail(request,event_id):
     event = Event.objects.filter(id=event_id)
+    participants = Participant.objects.filter(event=event_id, deleted=False).order_by("weight", "first_name")
+
+
     if request.method == "POST":
         form = ParticipantForm(request.POST)
         if form.is_valid():
@@ -23,7 +26,8 @@ def eventDetail(request,event_id):
         else:
             print(form.errors)
             return render(request, "eventDetail.html", {'form': form, 'errors': form.errors,'event':event})
-    return render(request, "eventDetail.html", {'event':event})
+    
+    return render(request, "eventDetail.html", {'event':event, 'participants':participants})
 
 
 def register_participant(request):

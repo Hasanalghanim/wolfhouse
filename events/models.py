@@ -37,6 +37,7 @@ class Participant(models.Model):
 
     years_of_training = models.IntegerField(null=True, blank=True)
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
+    weight = models.IntegerField(null=True, blank=True)
     
     payment_id = models.CharField(max_length=255) 
     deleted = models.BooleanField(default=False)
