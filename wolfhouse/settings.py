@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'main',
     'webhook',
     'events',
-    'ckeditor'
+    'ckeditor',
+    'openpyxl'
 ]
 
 MIDDLEWARE = [

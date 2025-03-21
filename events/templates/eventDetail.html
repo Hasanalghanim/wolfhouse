@@ -215,6 +215,13 @@
 		<div id="home" class="tab-pane fade show active">{% for e in event %} {{ e.rules|safe }} {% endfor %}</div>
 
 		<div id="menu1" class="tab-pane fade">
+			{% if user.is_authenticated %} {% for event in event %}
+			<form class="p-2" method="post" action="{% url 'exportEventParticipants'   event.id   %}">
+				{% csrf_token %}
+
+				<button type="submit" class="btn btn-warning">Export</button>
+			</form>
+			{% endfor %} {% endif%}
 			<table class="table table-sm">
 				<thead>
 					<tr>
