@@ -57,7 +57,7 @@ def exportEventParticipants(request,event_id):
         ws.title = 'Wolfhouse'
 
         # Write headers
-        headers = ['Full Name',  'Weight', 'DOB', 'Years Of Training','Gym',]
+        headers = ['Full Name',  'Weight', 'DOB', 'Years Of Training','Gym','Gender']
         for col_num, header in enumerate(headers, 1):
             ws.cell(row=1, column=col_num, value=header)
 
@@ -70,6 +70,7 @@ def exportEventParticipants(request,event_id):
             ws.cell(row=row_num, column=3, value=birthdate_value)
             ws.cell(row=row_num, column=4, value=participant.years_of_training)
             ws.cell(row=row_num, column=5, value=participant.school_name)
+            ws.cell(row=row_num, column=6, value=participant.gender)
             row_num += 1
 
         # Create a response object to serve the Excel file
