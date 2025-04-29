@@ -67,9 +67,36 @@
 		<script type="text/javascript" src="{% static 'functions.js' %}"></script>
 
 		<!-- jQuery, Popper.js, and Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		<script src="https://gymdesk.com/js/widgets.js"></script>
+
+		<script>
+			$(document).ready(function () {
+				// Show the last active tab on load
+				const savedTab = localStorage.getItem('activeTab');
+				if (savedTab) {
+					const tabLink = $('a[href="' + savedTab + '"]');
+					if (tabLink.length) {
+						tabLink.tab('show');
+					}
+				}
+
+				// When a tab is shown, save it and update URL hash
+				$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+					const href = $(e.target).attr('href');
+					localStorage.setItem('activeTab', href);
+
+					// Change the URL hash without scrolling
+					if (history.pushState) {
+						history.pushState(null, null, href);
+					} else {
+						window.location.hash = href;
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

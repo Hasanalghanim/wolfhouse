@@ -202,19 +202,19 @@
 	<div>{{error}}</div>
 	{% endfor %}
 
-	<ul class="nav nav-pills">
+	<ul class="nav nav-pills" id="event_tabs">
 		<li class="nav-item">
-			<a class="nav-link active bg-dark text-white" data-toggle="tab" href="#home">Rules + Extra Detail</a>
+			<a class="nav-link active bg-dark text-white" data-toggle="tab" href="#rules">Rules + Extra Detail</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link text-dark bg-white" data-toggle="tab" href="#menu1">Participants</a>
+			<a class="nav-link text-dark bg-white" data-toggle="tab" href="#participants">Participants</a>
 		</li>
 	</ul>
 
 	<div class="tab-content py-0">
-		<div id="home" class="tab-pane fade show active">{% for e in event %} {{ e.rules|safe }} {% endfor %}</div>
+		<div id="rules" class="tab-pane fade show active">{% for e in event %} {{ e.rules|safe }} {% endfor %}</div>
 
-		<div id="menu1" class="tab-pane fade">
+		<div id="participants" class="tab-pane fade">
 			{% if user.is_authenticated %} {% for event in event %}
 			<form class="p-2" method="post" action="{% url 'exportEventParticipants'   event.id   %}">
 				{% csrf_token %}
@@ -230,6 +230,10 @@
 						<th scope="col">Last name</th>
 						<th scope="col">Gym</th>
 						<th scope="col">Weight (lbs)</th>
+
+						{% if user.is_authenticated %}
+						<th>Delete</th>
+						{% endif %}
 					</tr>
 				</thead>
 				<tbody>
@@ -240,6 +244,62 @@
 						<td>{{p.last_name}}</td>
 						<td>{{p.school_name}}</td>
 						<td>{{p.weight}}lbs</td>
+						{% if user.is_authenticated %}
+						<td>
+							<button
+								id="deleteDialog"
+								data-toggle="modal"
+								data-target="#deleteDialogModel"
+								style="
+									padding: 5px 10px;
+									font-size: 1rem;
+									background-color: red;
+									color: white;
+									border: none;
+									border-radius: 5px;
+									cursor: pointer;
+								"
+							>
+								Delete
+							</button>
+						</td>
+						{% endif %}
+
+						<div
+							class="modal fade"
+							id="deleteDialogModel"
+							tabindex="-1"
+							role="dialog"
+							aria-labelledby="deleteDialogModelLabel"
+							aria-hidden="true"
+						>
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="deleteDialogModelLabel">Delete Percipient</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<form action="{% url 'delete_participant'  p.id %}" method="post">
+										{% csrf_token %} <input type="hidden" name="event_id" value="{{ p.event.id }}" />
+										<div class="dialogContent">
+											<div class="container">
+												<p>You're deleting the following Percipient</p>
+												<p>{{p.first_name}}</p>
+												<p>{{p.last_name}}</p>
+												<p>{{p.school_name}}</p>
+												<p>{{p.weight}}</p>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button id="card-button" type="submit" class="btn btn-primary">Delete</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -247,5 +307,5 @@
 		</div>
 	</div>
 </div>
-<script></script>
+
 {% endblock %}

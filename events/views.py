@@ -1,11 +1,12 @@
 
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import JsonResponse,HttpResponse
 
 from .forms import ParticipantForm
 from .models import Event,  Participant
 import openpyxl
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 #TODO
 
@@ -14,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-# Create your views here.
+
 def eventDetail(request,event_id):
     event = Event.objects.filter(id=event_id)
     participants = Participant.objects.filter(event=event_id, deleted=False).order_by("weight", "first_name")
@@ -83,3 +84,16 @@ def exportEventParticipants(request,event_id):
         return response
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+@login_required
+def delete_participant(request, percipient):
+    p = get_object_or_404(Participant, id=percipient)
+    if request.method == "POST":
+        event_id = request.POST.get('event_id')
+
+        
+        p.deleted = True
+        p.save()
+
+        return redirect(reverse('eventDetail', kwargs={'event_id': event_id}))
+    return redirect('home')
