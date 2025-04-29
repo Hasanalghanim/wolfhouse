@@ -1,0 +1,170 @@
+{% load static %}
+
+<div class="match-list-container">
+	<!-- Division Tabs -->
+	<ul class="nav nav-pills" id="event_tabs">
+		{% for division_data in divisions_with_matches %}
+		<li class="nav-item">
+			<a
+				class="nav-link {% if forloop.first %}active{% endif %}"
+				id="{{ division_data.division|slugify }}-tab"
+				data-toggle="pill"
+				href="#{{ division_data.division|slugify }}"
+			>
+				{{ division_data.division }}
+			</a>
+		</li>
+		{% empty %}
+		<li class="nav-item"><span class="nav-link disabled">No divisions found.</span></li>
+		{% endfor %}
+	</ul>
+
+	<!-- Tab Contents -->
+	<div class="tab-content mt-3">
+		{% for division_data in divisions_with_matches %}
+		<div
+			class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+			id="{{ division_data.division|slugify }}"
+			role="tabpanel"
+			aria-labelledby="{{ division_data.division|slugify }}-tab"
+		>
+			<div class="d-flex">
+				<!-- Leaderboard -->
+				<div class="leaderboard-container">
+					<h5 class="text-uppercase font-weight-bold">Leaderboard</h5>
+					<ol class="list-unstyled">
+						{% for participant in division_data.participants %}
+						<li class="d-flex justify-content-between align-items-center">
+							<span>{{ participant.name }}</span>
+							<span class="badge badge-info">{{ participant.points }} pts</span>
+						</li>
+						{% endfor %}
+					</ol>
+				</div>
+
+				<!-- Match Table -->
+				<div class="match-table-container flex-grow-1 ml-4">
+					<h5 class="text-uppercase font-weight-bold">Matches</h5>
+					<table class="table table-sm table-striped table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th>#</th>
+								<th>Red Corner</th>
+								<th>Blue Corner</th>
+								<th>Winner</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for match in division_data.matches %}
+							<tr>
+								<th scope="row">{{ forloop.counter }}</th>
+								<td>{{ match.participant1 }}</td>
+								<td>{{ match.participant2 }}</td>
+								<td>{% if match.winner %}{{ match.winner }}{% endif %}</td>
+							</tr>
+							{% empty %}
+							<tr>
+								<td colspan="4" class="text-center">No matches in this division.</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+<!-- Add custom styles for a more professional look -->
+<style>
+	.nav-pills .nav-link {
+		background-color: #343a40;
+		color: #ffffff;
+		font-weight: bold;
+		text-transform: uppercase;
+		border-radius: 4px;
+		padding: 8px 15px;
+	}
+
+	.nav-pills .nav-link.active {
+		background-color: #007bff;
+		color: #ffffff;
+	}
+
+	.match-list-container {
+		background-color: #f7f9fc;
+		padding: 30px;
+		border-radius: 8px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.leaderboard-container {
+		background-color: #ffffff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		width: 250px;
+		height: auto;
+	}
+
+	.match-table-container {
+		background-color: #ffffff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		width: calc(100% - 270px);
+	}
+
+	table th {
+		font-size: 14px;
+		font-weight: 600;
+		text-transform: uppercase;
+		background-color: #343a40;
+		color: white;
+	}
+
+	table td {
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	.badge-info {
+		background-color: #17a2b8;
+	}
+
+	.text-uppercase {
+		text-transform: uppercase;
+	}
+
+	.font-weight-bold {
+		font-weight: bold;
+	}
+
+	.match-table-container .table {
+		margin-top: 20px;
+	}
+
+	/* Flexbox for better alignment */
+	.d-flex {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	/* Responsive adjustment */
+	@media (max-width: 768px) {
+		.d-flex {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.leaderboard-container {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+
+		.match-table-container {
+			width: 100%;
+		}
+	}
+</style>

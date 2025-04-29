@@ -3,10 +3,12 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import JsonResponse,HttpResponse
 
 from .forms import ParticipantForm
-from .models import Event,  Participant
+from .models import Event, Participant,Division,Match
 import openpyxl
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.template.loader import render_to_string
+from django.db.models import F
 
 #TODO
 
@@ -97,3 +99,48 @@ def delete_participant(request, percipient):
 
         return redirect(reverse('eventDetail', kwargs={'event_id': event_id}))
     return redirect('home')
+
+
+def match_list(request, event_id):
+    # Get the event based on event_id
+    event = get_object_or_404(Event, id=event_id)
+
+    # Get all divisions related to the event
+    divisions = Division.objects.filter(event=event)
+
+    # Prepare the data structure with divisions and their matches
+    divisions_with_matches = []
+
+    for division in divisions:
+        # Get all matches for the current division
+        matches = Match.objects.filter(division=division)
+        
+        participants = Participant.objects.filter(division=division).annotate(
+            total_points=F('points') ).order_by('-total_points')
+        # Add the division and its matches to the list
+        divisions_with_matches.append({
+            'division': division.name,  # or whatever field you want to display from Division
+            'matches': [
+                        {
+                            'participant1': f"{match.participant1.first_name} {match.participant1.last_name}",
+                            'participant2': f"{match.participant2.first_name} {match.participant2.last_name}",
+                            'winner': f"{match.winner.first_name} {match.winner.last_name}" if match.winner else None,
+                            'match_id': match.id
+                        }
+                for match in matches
+            ],'participants': [
+            {
+                'name': f"{p.first_name} {p.last_name}",
+                'points': p.points  # or whatever your score field is
+            } for p in participants
+        ]
+        })
+    
+    # Render the partial template with the new data structure
+    html = render_to_string('match_list.html', {
+        'divisions_with_matches': divisions_with_matches,
+        'event': event
+    })
+
+    # Return the HTML as a JSON response
+    return JsonResponse({'html': html})

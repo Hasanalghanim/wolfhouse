@@ -63,15 +63,15 @@
 
 		<footer class="footerBar">&copy; <span id="footer-year"></span> <span> All Rights reserved.</span></footer>
 
-		<!-- Custom Scripts -->
-		<script type="text/javascript" src="{% static 'functions.js' %}"></script>
-
 		<!-- jQuery, Popper.js, and Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- Custom Scripts -->
+
 		<script src="https://gymdesk.com/js/widgets.js"></script>
+		<script type="text/javascript" src="{% static 'functions.js' %}"></script>
 
 		<script>
 			$(document).ready(function () {
@@ -96,8 +96,7 @@
 						window.location.hash = href;
 					}
 				});
-			});
-			$(document).ready(function () {
+
 				// Event listener for the "Delete" button
 				$('.deleteDialogBtn').on('click', function () {
 					// Get the participant data from the button's data attributes
@@ -119,6 +118,27 @@
 
 					// Update the form action with the correct participant ID
 					$('#deleteForm').attr('action', "{% url 'delete_participant' '0' %}".replace('0', participantId));
+				});
+
+				$(document).ready(function () {
+					$('#matchList-tab').on('click', function () {
+						// Show loading text while waiting for data
+						$('#matchListContainer').html('<p>Loading match list...</p>');
+
+						const eventId = $(this).data('event-id');
+						const baseUrl = $(this).data('url'); // will be like /match_list/0/ c
+						const url = baseUrl.replace('0', eventId);
+						$.ajax({
+							url: url,
+							method: 'GET',
+							success: function (data) {
+								$('#matchListContainer').html(data.html); // Insert the rendered HTML
+							},
+							error: function () {
+								$('#matchListContainer').html('<p>Error loading match list.</p>'); // Show error message
+							},
+						});
+					});
 				});
 			});
 		</script>

@@ -1,5 +1,5 @@
 {% extends "base.html" %} {%load static%}{% block content %}
-<style></style>
+
 <div class="eventsMainDiv">
 	<div class="eventSummary">
 		{% for event in event%}
@@ -194,22 +194,35 @@
 					</div>
 				</div>
 			</div>
-
-			{% endfor %}
 		</div>
 	</div>
-	{% for error in errors%}
-	<div>{{error}}</div>
-	{% endfor %}
 
 	<ul class="nav nav-pills" id="event_tabs">
 		<li class="nav-item">
-			<a class="nav-link active bg-dark text-white" data-toggle="tab" href="#rules">Rules + Extra Detail</a>
+			<a class="nav-link active" id="rules-tab" data-toggle="pill" href="#rules">Rules + Extra Detail</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link text-dark bg-white" data-toggle="tab" href="#participants">Participants</a>
+			<a class="nav-link" id="participants-tab" data-toggle="pill" href="#participants">Participants</a>
 		</li>
+
+		{% if user.is_authenticated %}
+		<li class="nav-item">
+			<a
+				class="nav-link"
+				id="matchList-tab"
+				data-toggle="pill"
+				href="#matchList"
+				data-event-id="{{ event.id }}"
+				data-url="{% url 'match_list' 0 %}"
+				>Match List</a
+			>
+		</li>
+		{% endif %}
 	</ul>
+
+	{% for error in errors%}
+	<div>{{error}}</div>
+	{% endfor %} {% endfor %}
 
 	<div class="tab-content py-0">
 		<div id="rules" class="tab-pane fade show active">{% for e in event %} {{ e.rules|safe }} {% endfor %}</div>
@@ -310,8 +323,11 @@
 				</tbody>
 			</table>
 		</div>
+
+		<div id="matchList" class="tab-pane fade">
+			<div id="matchListContainer"></div>
+		</div>
 	</div>
 </div>
-<script></script>
 
 {% endblock %}
