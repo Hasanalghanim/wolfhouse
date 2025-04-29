@@ -97,6 +97,30 @@
 					}
 				});
 			});
+			$(document).ready(function () {
+				// Event listener for the "Delete" button
+				$('.deleteDialogBtn').on('click', function () {
+					// Get the participant data from the button's data attributes
+					const participantId = $(this).data('id');
+					const eventId = $(this).data('event-id');
+					const firstName = $(this).data('first-name');
+					const lastName = $(this).data('last-name');
+					const schoolName = $(this).data('school-name');
+					const weight = $(this).data('weight');
+
+					// Set modal text
+					$('#modalFirstName').text(firstName);
+					$('#modalLastName').text(lastName);
+					$('#modalSchoolName').text(schoolName);
+					$('#modalWeight').text(weight);
+
+					// Set hidden input value for the event ID
+					$('#modalEventId').val(eventId);
+
+					// Update the form action with the correct participant ID
+					$('#deleteForm').attr('action', "{% url 'delete_participant' '0' %}".replace('0', participantId));
+				});
+			});
 		</script>
 	</body>
 </html>

@@ -247,9 +247,15 @@
 						{% if user.is_authenticated %}
 						<td>
 							<button
-								id="deleteDialog"
+								class="deleteDialogBtn"
 								data-toggle="modal"
 								data-target="#deleteDialogModel"
+								data-id="{{ p.id }}"
+								data-event-id="{{ p.event.id }}"
+								data-first-name="{{ p.first_name }}"
+								data-last-name="{{ p.last_name }}"
+								data-school-name="{{ p.school_name }}"
+								data-weight="{{ p.weight }}"
 								style="
 									padding: 5px 10px;
 									font-size: 1rem;
@@ -281,20 +287,19 @@
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<form action="{% url 'delete_participant'  p.id %}" method="post">
-										{% csrf_token %} <input type="hidden" name="event_id" value="{{ p.event.id }}" />
-										<div class="dialogContent">
-											<div class="container">
-												<p>You're deleting the following Percipient</p>
-												<p>{{p.first_name}}</p>
-												<p>{{p.last_name}}</p>
-												<p>{{p.school_name}}</p>
-												<p>{{p.weight}}</p>
-											</div>
+									<form id="deleteForm" method="post">
+										{% csrf_token %}
+										<input type="hidden" name="event_id" id="modalEventId" />
+										<div class="modal-body">
+											<p>You're deleting the following Percipient:</p>
+											<p id="modalFirstName"></p>
+											<p id="modalLastName"></p>
+											<p id="modalSchoolName"></p>
+											<p id="modalWeight"></p>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button id="card-button" type="submit" class="btn btn-primary">Delete</button>
+											<button type="submit" class="btn btn-danger">Delete</button>
 										</div>
 									</form>
 								</div>
@@ -307,5 +312,6 @@
 		</div>
 	</div>
 </div>
+<script></script>
 
 {% endblock %}
