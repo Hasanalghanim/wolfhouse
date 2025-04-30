@@ -282,7 +282,7 @@
 						<td>{{p.last_name}}</td>
 						<td>{{p.school_name}}</td>
 						<td>{{p.weight}}lbs</td>
-						{% if user.is_authenticated %}
+						{% if user.is_superuser %}
 						<td>
 							<button
 								class="deleteDialogBtn"
