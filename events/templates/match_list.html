@@ -1,12 +1,12 @@
-{% load static %}
+{% load static %} {% load static custom_filters %}
 
-<div class="match-list-container">
+<div class="match-list-container" data-event-id="{{ event.id }}">
 	<!-- Division Tabs -->
-	<ul class="nav nav-pills" id="event_tabs">
+	<ul class="nav nav-pills" id="subEvent_tabs">
 		{% for division_data in divisions_with_matches %}
 		<li class="nav-item">
 			<a
-				class="nav-link {% if forloop.first %}active{% endif %}"
+				class="nav-link rounded-0 {% if forloop.first %}active{% endif %}"
 				id="{{ division_data.division|slugify }}-tab"
 				data-toggle="pill"
 				href="#{{ division_data.division|slugify }}"
@@ -20,7 +20,7 @@
 	</ul>
 
 	<!-- Tab Contents -->
-	<div class="tab-content mt-3">
+	<div class="tab-content mt-3" id="division_tab_content">
 		{% for division_data in divisions_with_matches %}
 		<div
 			class="tab-pane fade {% if forloop.first %}show active{% endif %}"
@@ -35,7 +35,10 @@
 					<ol class="list-unstyled">
 						{% for participant in division_data.participants %}
 						<li class="d-flex justify-content-between align-items-center">
-							<span>{{ participant.name }}</span>
+							<div>
+								<span>#{{ forloop.counter }} -</span>
+								<span>{{ participant.name }}</span>
+							</div>
 							<span class="badge badge-info">{{ participant.points }} pts</span>
 						</li>
 						{% endfor %}
@@ -43,12 +46,15 @@
 				</div>
 
 				<!-- Match Table -->
-				<div class="match-table-container flex-grow-1 ml-4">
+				<div class="match-table-container flex-grow-1 ml-0">
 					<h5 class="text-uppercase font-weight-bold">Matches</h5>
-					<table class="table table-sm table-striped table-bordered">
+
+					<!-- Table view for medium+ screens -->
+					<table class="table table-sm table-striped table-bordered d-none d-md-table">
 						<thead class="thead-dark">
 							<tr>
 								<th>#</th>
+								<th>Round</th>
 								<th>Red Corner</th>
 								<th>Blue Corner</th>
 								<th>Winner</th>
@@ -58,17 +64,95 @@
 							{% for match in division_data.matches %}
 							<tr>
 								<th scope="row">{{ forloop.counter }}</th>
-								<td>{{ match.participant1 }}</td>
-								<td>{{ match.participant2 }}</td>
-								<td>{% if match.winner %}{{ match.winner }}{% endif %}</td>
+								<td>{{ match.round_number }}</td>
+								<td>{{ match.participant1.name|default:"Participant 1" }}</td>
+								<td>{{ match.participant2.name|default:"Participant 2" }}</td>
+								<td>
+									{% if match.winner %} {{ match.winner.name}} {% else %}
+									<form method="post" action="{% url 'update_match_winner' %}" class="">
+										{% if user.is_authenticated or user|has_perm:"events.change_participant" %}
+										<div class="d-flex w-100">
+											<select
+												class="form-control form-control-sm d-inline-block w-auto winner-select"
+												data-match-id="{{ match.match_id }}"
+											>
+												<option value="">TBD</option>
+												{% if match.participant1.id %}
+												<option value="{{ match.participant1.id }}">
+													{{ match.participant1.name|default:"Participant 1" }}
+												</option>
+												{% endif %} {% if match.participant2.id %}
+												<option value="{{ match.participant2.id }}">
+													{{ match.participant2.name|default:"Participant 2" }}
+												</option>
+												{% endif %}
+											</select>
+											<button
+												type="submit"
+												class="btn btn-sm btn-primary save-winner-btn"
+												data-match-id="{{ match.match_id }}"
+											>
+												Save
+											</button>
+										</div>
+										{%endif%}
+									</form>
+									{% endif %}
+								</td>
 							</tr>
 							{% empty %}
 							<tr>
-								<td colspan="4" class="text-center">No matches in this division.</td>
+								<td colspan="5" class="text-center">No matches in this division.</td>
 							</tr>
 							{% endfor %}
 						</tbody>
 					</table>
+
+					<!-- Card view for small screens -->
+					<div class="d-block d-md-none">
+						{% for match in division_data.matches %}
+						<div class="card mb-3 shadow-sm">
+							<div class="card-body p-2">
+								<h6 class="card-title mb-1 font-weight-bold">Match {{ forloop.counter }}</h6>
+								<p class="mb-1"><strong>Round:</strong> {{ match.round_number }}</p>
+								<p class="mb-1">
+									<strong>Red Corner:</strong> {{ match.participant1.name|default:"Participant 1" }}
+								</p>
+								<p class="mb-1">
+									<strong>Blue Corner:</strong> {{ match.participant2.name|default:"Participant 2" }}
+								</p>
+
+								<div class="mb-1">
+									<strong>Winner:</strong>
+									{% if match.winner %} {{ match.winner.name }} {% else %}
+									<form method="post" action="{% url 'update_match_winner' %}" class="d-flex">
+										{% if user.is_authenticated or user|has_perm:"events.change_participant" %}
+										<div class="d-flex w-100">
+											{% csrf_token %}
+											<input type="hidden" name="match_id" value="{{ match.match_id }}" />
+											<select
+												name="winner_id"
+												class="form-control form-control-sm d-inline-block w-auto mr-2"
+											>
+												<option value="">TBD</option>
+												{% if match.participant1.id %}
+												<option value="{{ match.participant1.id }}">{{ match.participant1.name }}</option>
+												{% endif %} {% if match.participant2.id %}
+												<option value="{{ match.participant2.id }}">{{ match.participant2.name }}</option>
+												{% endif %}
+											</select>
+											<button type="submit" class="btn btn-sm btn-primary">Save</button>
+										</div>
+										{%endif%}
+									</form>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% empty %}
+						<div class="text-center">No matches in this division.</div>
+						{% endfor %}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -76,8 +160,35 @@
 	</div>
 </div>
 
-<!-- Add custom styles for a more professional look -->
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const savedTab = localStorage.getItem('DivTab');
+		if (savedTab) {
+			const targetTab = document.querySelector(`#subEvent_tabs a[href="${savedTab}"]`);
+			if (targetTab) {
+				$(targetTab).tab('show');
+			}
+		}
+
+		document.querySelectorAll('#subEvent_tabs a[data-toggle="pill"]').forEach(function (tab) {
+			tab.addEventListener('shown.bs.tab', function (e) {
+				const href = e.target.getAttribute('href');
+				localStorage.setItem('DivTab', href);
+			});
+		});
+	});
+</script>
+
 <style>
+	@media (max-width: 768px) {
+		.card-body p {
+			font-size: 14px;
+			margin-bottom: 4px;
+		}
+		.card-title {
+			font-size: 16px;
+		}
+	}
 	.nav-pills .nav-link {
 		background-color: #343a40;
 		color: #ffffff;

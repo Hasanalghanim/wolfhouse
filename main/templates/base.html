@@ -76,20 +76,22 @@
 		<script>
 			$(document).ready(function () {
 				// Show the last active tab on load
+
+				// Restore the last active tab
 				const savedTab = localStorage.getItem('activeTab');
 				if (savedTab) {
-					const tabLink = $('a[href="' + savedTab + '"]');
-					if (tabLink.length) {
-						tabLink.tab('show');
+					const tabTrigger = document.querySelector(`a[href="${savedTab}"]`);
+					if (tabTrigger) {
+						const tab = new bootstrap.Tab(tabTrigger);
+						tab.show();
 					}
 				}
 
-				// When a tab is shown, save it and update URL hash
-				$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+				// Save tab on change
+				$('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
 					const href = $(e.target).attr('href');
 					localStorage.setItem('activeTab', href);
 
-					// Change the URL hash without scrolling
 					if (history.pushState) {
 						history.pushState(null, null, href);
 					} else {
@@ -108,16 +110,40 @@
 					const weight = $(this).data('weight');
 
 					// Set modal text
-					$('#modalFirstName').text(firstName);
-					$('#modalLastName').text(lastName);
-					$('#modalSchoolName').text(schoolName);
-					$('#modalWeight').text(weight);
+
+					$('#modalFirstName').text(`First Name: ${firstName}`);
+					$('#modalLastName').text(`Last Name: ${lastName}`);
+					$('#modalSchoolName').text(`School: ${schoolName}`);
+					$('#modalWeight').text(`Weight: ${weight}`);
 
 					// Set hidden input value for the event ID
 					$('#modalEventId').val(eventId);
 
 					// Update the form action with the correct participant ID
 					$('#deleteForm').attr('action', "{% url 'delete_participant' '0' %}".replace('0', participantId));
+				});
+
+				// Event listener for the "Delete" button
+				$('.paidDialogBtn').on('click', function () {
+					// Get the participant data from the button's data attributes
+					const participantId = $(this).data('id');
+					const eventId = $(this).data('event-id');
+					const firstName = $(this).data('first-name');
+					const lastName = $(this).data('last-name');
+					const schoolName = $(this).data('school-name');
+					const weight = $(this).data('weight');
+
+					// Set modal text
+					$('#paidFirstName').text(`First Name: ${firstName}`);
+					$('#paidLastName').text(`Last Name: ${lastName}`);
+					$('#paidSchoolName').text(`School: ${schoolName}`);
+					$('#paidWeight').text(`Weight: ${weight}`);
+
+					// Set hidden input value for the event ID
+					$('#paidModalEventId').val(eventId);
+
+					// Update the form action with the correct participant ID
+					$('#paidForm').attr('action', "{% url 'paid_participant' '0' %}".replace('0', participantId));
 				});
 
 				$(document).ready(function () {

@@ -2,7 +2,7 @@
 
 <div class="eventsMainDiv">
 	<div class="eventSummary">
-		{% for event in event%}
+		{% for event in event %}
 
 		<div class="eventSummaryContainer">
 			<div class="eventSummaryContainerImageContainer">
@@ -197,37 +197,61 @@
 		</div>
 	</div>
 
-	<ul class="nav nav-pills" id="event_tabs">
-		<li class="nav-item">
-			<a class="nav-link active" id="rules-tab" data-toggle="pill" href="#rules">Rules + Extra Detail</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" id="participants-tab" data-toggle="pill" href="#participants">Participants</a>
-		</li>
-
-		{% if user.is_authenticated %}
+	<ul class="nav nav-pills" id="event_tabs" role="tablist">
 		<li class="nav-item">
 			<a
-				class="nav-link"
+				class="nav-link active rounded-0"
+				id="rules-tab"
+				data-toggle="pill"
+				href="#rules"
+				role="tab"
+				aria-controls="rules"
+				aria-selected="true"
+			>
+				Rules + Extra Detail
+			</a>
+		</li>
+		<li class="nav-item">
+			<a
+				class="nav-link rounded-0"
+				id="participants-tab"
+				data-toggle="pill"
+				href="#participants"
+				role="tab"
+				aria-controls="participants"
+				aria-selected="false"
+			>
+				Participants
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a
+				class="nav-link rounded-0"
 				id="matchList-tab"
 				data-toggle="pill"
 				href="#matchList"
+				role="tab"
+				aria-controls="matchList"
+				aria-selected="false"
 				data-event-id="{{ event.id }}"
 				data-url="{% url 'match_list' 0 %}"
-				>Match List</a
 			>
+				Match List
+			</a>
 		</li>
-		{% endif %}
 	</ul>
 
 	{% for error in errors%}
 	<div>{{error}}</div>
 	{% endfor %} {% endfor %}
 
-	<div class="tab-content py-0">
-		<div id="rules" class="tab-pane fade show active">{% for e in event %} {{ e.rules|safe }} {% endfor %}</div>
+	<div class="tab-content py-0" id="event_tabs_content">
+		<div id="rules" role="tabpanel" class="tab-pane fade show active" aria-labelledby="rules-tab">
+			{% for e in event %} {{ e.rules|safe }} {% endfor %}
+		</div>
 
-		<div id="participants" class="tab-pane fade">
+		<div id="participants" role="tabpanel" class="tab-pane fade" aria-labelledby="participants-tab">
 			{% if user.is_authenticated %} {% for event in event %}
 			<form class="p-2" method="post" action="{% url 'exportEventParticipants'   event.id   %}">
 				{% csrf_token %}
@@ -244,8 +268,9 @@
 						<th scope="col">Gym</th>
 						<th scope="col">Weight (lbs)</th>
 
-						{% if user.is_authenticated %}
+						{% if user.is_superuser %}
 						<th>Delete</th>
+						<th>Paid</th>
 						{% endif %}
 					</tr>
 				</thead>
@@ -282,6 +307,48 @@
 								Delete
 							</button>
 						</td>
+
+						<td>
+							{% if not p.payment_id %}
+							<button
+								class="paidDialogBtn"
+								data-toggle="modal"
+								data-target="#paidDialogModel"
+								data-id="{{ p.id }}"
+								data-event-id="{{ p.event.id }}"
+								data-first-name="{{ p.first_name }}"
+								data-last-name="{{ p.last_name }}"
+								data-school-name="{{ p.school_name }}"
+								data-weight="{{ p.weight }}"
+								style="
+									padding: 5px 10px;
+									font-size: 1rem;
+									background-color: orange;
+									color: white;
+									border: none;
+									border-radius: 5px;
+									cursor: pointer;
+								"
+							>
+								Paid
+							</button>
+							{% else %}
+
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								fill="green"
+								class="bi bi-check"
+								viewBox="0 0 16 16"
+							>
+								<path
+									d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"
+								/>
+							</svg>
+							{%endif%}
+						</td>
+
 						{% endif %}
 
 						<div
@@ -318,13 +385,49 @@
 								</div>
 							</div>
 						</div>
+						<div
+							class="modal fade"
+							id="paidDialogModel"
+							tabindex="-1"
+							role="dialog"
+							aria-labelledby="paidDialogModelLabel"
+							aria-hidden="true"
+						>
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="paidDialogModelLabel">Paid Percipient</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<form id="paidForm" method="post">
+										{% csrf_token %}
+										<input type="hidden" name="event_id" id="paidModalEventId" />
+										<div class="modal-body">
+											<p>You're Registering this participant as a Paid Participants:</p>
+											<div class="">
+												<p id="paidFirstName"></p>
+												<p id="paidLastName"></p>
+												<p id="paidSchoolName"></p>
+												<p id="paidWeight"></p>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-success">Paid</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
 					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
 
-		<div id="matchList" class="tab-pane fade">
+		<div id="matchList" role="tabpanel" class="tab-pane fade" aria-labelledby="matchList-tab">
 			<div id="matchListContainer"></div>
 		</div>
 	</div>

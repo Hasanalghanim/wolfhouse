@@ -32,9 +32,46 @@ class Division(models.Model):
         return f"{self.name} - {self.event.title}"
 
     def generate_matches(self):
-        participants = list(self.participants.all())
+        participants = list(self.participants.filter(deleted=False))
         for p1, p2 in combinations(participants, 2):
             Match.objects.create(division=self, participant1=p1, participant2=p2)
+
+    def generate_matches_with_rounds(self):
+        participants = list(self.participants.filter(deleted=False))
+        num_participants = len(participants)
+
+        is_odd = num_participants % 2 == 1
+        if is_odd:
+            participants.append(None)  # Add a bye if odd
+
+        num_rounds = len(participants) - 1
+        mid = len(participants) // 2
+
+        for round_number in range(num_rounds):
+            for i in range(mid):
+                p1 = participants[i]
+                p2 = participants[-(i + 1)]
+
+                # Check if either participant is None (which means they have a bye)
+                if p1 is None or p2 is None:
+                    # Create a match with None as one of the participants
+                    Match.objects.create(
+                        division=self,
+                        participant1=p1,
+                        participant2=p2,
+                        round_number=round_number + 1
+                    )
+                else:
+                    # Create a regular match between two participants
+                    Match.objects.create(
+                        division=self,
+                        participant1=p1,
+                        participant2=p2,
+                        round_number=round_number + 1
+                    )
+
+            # Rotate participants for next round
+            participants = [participants[0]] + [participants[-1]] + participants[1:-1]
 
     def get_winner(self):
         return self.participants.order_by('-points').first()
@@ -72,9 +109,10 @@ class Participant(models.Model):
 
 class Match(models.Model):
     division = models.ForeignKey(Division, related_name='matches', on_delete=models.CASCADE)
-    participant1 = models.ForeignKey(Participant, related_name='red', on_delete=models.CASCADE)
-    participant2 = models.ForeignKey(Participant, related_name='blue', on_delete=models.CASCADE)
+    participant1 = models.ForeignKey(Participant, related_name='red', on_delete=models.CASCADE,null=True, blank=True)
+    participant2 = models.ForeignKey(Participant, related_name='blue', on_delete=models.CASCADE,null=True, blank=True)
     winner = models.ForeignKey(Participant, null=True, blank=True, related_name='won_matches', on_delete=models.SET_NULL)
+    round_number = models.IntegerField(default=1) 
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -86,4 +124,6 @@ class Match(models.Model):
             self.participant2.update_points()
 
     def __str__(self):
-        return f"{self.participant1} vs {self.participant2} ({self.division.name})"
+        p1 = self.participant1 if self.participant1 else "No Participant"
+        p2 = self.participant2 if self.participant2 else "No Participant"
+        return f"{p1} vs {p2} ({self.division.name})"

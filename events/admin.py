@@ -35,20 +35,20 @@ class ParticipantInline(admin.TabularInline):
 
 
 
-
-
-
-
-
 @admin.register(Division)
 class DivisionAdmin(admin.ModelAdmin):
     list_display = ('name', 'event', 'division_winner')
-    actions = ['generate_round_robin_matches']
+    actions = ['generate_round_robin_matches','generate_round_robin_matches_with_rounds']
     inlines = [ParticipantInline, MatchInline]
     def generate_round_robin_matches(self, request, queryset):
         for division in queryset:
             division.generate_matches()
         self.message_user(request, "Round-robin matches generated successfully.")
+
+    def generate_round_robin_matches_with_rounds(self, request, queryset):
+        for division in queryset:
+            division.generate_matches_with_rounds()
+        self.message_user(request, "Round-robin matches generated successfully.")   
     generate_round_robin_matches.short_description = "Generate round-robin matches"
 
     def division_winner(self, obj):
