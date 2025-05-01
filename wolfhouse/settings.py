@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4=67-lgx*#f=qosm)ov2r(i2tvzm07qd)tqo8w9gn__tbai29e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['wolfhousemma.com','www.wolfhousemma.com','*']
+ALLOWED_HOSTS = ['wolfhousemma.com','www.wolfhousemma.com',]
 
 
 # Application definition
@@ -87,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
