@@ -70,7 +70,9 @@
 								<td>
 									{% if match.winner %} {{ match.winner.name}} {% else %}
 									<form method="post" action="{% url 'update_match_winner' %}" class="">
-										{% if user.is_authenticated or user|has_perm:"events.change_participant" %}
+										{% csrf_token %} {% if user.is_authenticated or user|has_perm:"events.change_participant"
+										%}
+
 										<div class="d-flex w-100">
 											<select
 												class="form-control form-control-sm d-inline-block w-auto winner-select"
