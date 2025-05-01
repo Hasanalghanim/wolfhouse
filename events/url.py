@@ -10,4 +10,5 @@ urlpatterns = [
     path('paid-percipient/<int:percipient>/',views.paid_participant, name='paid_participant'),
     path('<int:event_id>/match-list/', views.match_list, name='match_list'),
     path('update-winner/', views.update_match_winner, name='update_match_winner'),
+    path('update_participant_division/', views.update_participant_division, name='update_participant_division'),
 ]

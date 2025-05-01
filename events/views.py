@@ -22,25 +22,24 @@ import json
 def eventDetail(request,event_id):
     event = Event.objects.filter(id=event_id)
     participants = Participant.objects.filter(event=event_id, deleted=False).order_by("weight", "first_name")
-
-
+    divisions = Division.objects.filter(event=event_id).order_by("name")
     if request.method == "POST":
         form = ParticipantForm(request.POST)
         if form.is_valid():
-            form.save()  # Save participant data
-            return render(request, "confirmRegistration.html", {'success': True, 'event':event})
+            form.save()  
+            return render(request, "confirmRegistration.html", {'success': True, 'event':event,'divisions': divisions})
         else:
             print(form.errors)
-            return render(request, "eventDetail.html", {'form': form, 'errors': form.errors,'event':event})
+            return render(request, "eventDetail.html", {'form': form, 'errors': form.errors,'event':event,'divisions': divisions})
     
-    return render(request, "eventDetail.html", {'event':event, 'participants':participants})
+    return render(request, "eventDetail.html", {'event':event, 'participants':participants,'divisions': divisions})
 
 
 def register_participant(request):
     if request.method == "POST":
         form = ParticipantForm(request.POST)
         if form.is_valid():
-            form.save()  # Save participant data
+            form.save()  
             return render(request, "eventDetail.html", {'success': True})
         else:
             return render(request, "eventDetail.html", {'form': form, 'errors': form.errors})
@@ -130,7 +129,7 @@ def match_list(request, event_id):
         # Get all matches for the current division
         matches = Match.objects.filter(division=division)
         
-        participants = Participant.objects.filter(division=division).annotate(
+        participants = Participant.objects.filter(division=division,deleted=False).annotate(
             total_points=F('points')).order_by('-total_points')
 
         # Add the division and its matches to the list
@@ -183,7 +182,7 @@ def update_match_winner(request):
     if request.method == "POST":
         match_id = request.POST.get('match_id')
         winner_id = request.POST.get('winner_id')
-
+        print(match_id,winner_id)
         try:
             match = Match.objects.get(id=match_id)
             if winner_id:
@@ -192,9 +191,38 @@ def update_match_winner(request):
             else:
                 match.winner = None
             match.save()
-            # Optional: redirect or respond as needed
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Redirect back to the previous page
+            
+            return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request method'})
+    
+
+
+@login_required
+def update_participant_division(request):
+    if request.method == "POST":
+        participant_id = request.POST.get('participant_id')
+        division_id = request.POST.get('division')
+        event_id = request.POST.get('event_id')
+        try:
+            
+            participant = get_object_or_404(Participant, id=participant_id)
+            if division_id:
+                division = get_object_or_404(Division, id=division_id)
+                participant.division = division
+            else:
+                participant.division = None  
+            
+            participant.save()
+
+            return redirect('eventDetail', event_id=event_id)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            
+            return redirect('eventDetail', event_id=event_id)
+
+    
+    return redirect('eventDetail', event_id=event_id)

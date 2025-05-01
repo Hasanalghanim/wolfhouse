@@ -1,4 +1,53 @@
-// JavaScript to toggle navbar items when hamburger button is clicked
+document.addEventListener('DOMContentLoaded', function () {
+	console.log('✅ Script loaded');
+
+	rebindDivisionTabListener();
+
+	updateBackgroundImages();
+	updateLandingPageImages();
+	updateEventsImages();
+
+	window.addEventListener('resize', function () {
+		updateBackgroundImages();
+		updateLandingPageImages();
+		updateEventsImages();
+	});
+});
+
+$(document).on('submit', 'form.update-match-form', function (e) {
+	e.preventDefault();
+	console.log('📤 Match form submitted via AJAX');
+
+	const form = $(this);
+	const matchId = form.find('[name="match_id"]').val();
+	const winnerId = form.find('[name="winner_id"]').val();
+	const eventId = form.find('[name="event_id"]').val() || $('#matchList-tab').data('event-id');
+	const csrfToken = form.find('[name="csrfmiddlewaretoken"]').val();
+
+	$.ajax({
+		url: form.attr('action'),
+		type: 'POST',
+		data: {
+			match_id: matchId,
+			winner_id: winnerId,
+			event_id: eventId,
+			csrfmiddlewaretoken: csrfToken,
+		},
+		success: function (response) {
+			console.log('✅ AJAX response:', response);
+			if (response.success) {
+				console.log('✅ Match updated, refreshing match list...');
+				$('#matchList-tab').trigger('click');
+			} else {
+				alert('⚠️ Error: ' + response.error);
+			}
+		},
+		error: function () {
+			alert('❌ Failed to submit match update.');
+		},
+	});
+});
+
 function menuToggle() {
 	document.getElementById('menu').classList.toggle('show');
 	document.body.classList.toggle('menu-open');
@@ -40,58 +89,48 @@ function setFooterYear() {
 }
 window.onload = setFooterYear;
 
-document.addEventListener('DOMContentLoaded', function () {
-	function updateBackgroundImages() {
-		const containers = document.querySelectorAll('.specificTrainingContainer');
+function updateBackgroundImages() {
+	const containers = document.querySelectorAll('.specificTrainingContainer');
 
-		containers.forEach((container) => {
-			const originalUrl = container.getAttribute('data-original-url');
-			const croppedUrl = container.getAttribute('data-cropped-url');
+	containers.forEach((container) => {
+		const originalUrl = container.getAttribute('data-original-url');
+		const croppedUrl = container.getAttribute('data-cropped-url');
 
-			if (window.innerWidth <= 800) {
-				container.style.backgroundImage = `url(${originalUrl})`;
-			} else {
-				container.style.backgroundImage = `url(${croppedUrl})`;
-			}
-		});
-	}
+		if (window.innerWidth <= 800) {
+			container.style.backgroundImage = `url(${originalUrl})`;
+		} else {
+			container.style.backgroundImage = `url(${croppedUrl})`;
+		}
+	});
+}
 
-	function updateLandingPageImages() {
-		const backgrounds = document.querySelectorAll('.landingPageBackgroundPhoto');
-		backgrounds.forEach((background) => {
-			const originalUrl = background.getAttribute('data-original-url');
-			const croppedUrl = background.getAttribute('data-cropped-url');
+function updateLandingPageImages() {
+	const backgrounds = document.querySelectorAll('.landingPageBackgroundPhoto');
+	backgrounds.forEach((background) => {
+		const originalUrl = background.getAttribute('data-original-url');
+		const croppedUrl = background.getAttribute('data-cropped-url');
 
-			if (window.innerWidth <= 800) {
-				background.style.backgroundImage = `url(${originalUrl})`;
-			} else {
-				background.style.backgroundImage = `url(${croppedUrl})`;
-			}
-		});
-	}
+		if (window.innerWidth <= 800) {
+			background.style.backgroundImage = `url(${originalUrl})`;
+		} else {
+			background.style.backgroundImage = `url(${croppedUrl})`;
+		}
+	});
+}
 
-	function updateEventsImages() {
-		const events = document.querySelectorAll('.singleEventImage');
-		events.forEach((background) => {
-			const originalUrl = background.getAttribute('data-original-url');
-			const croppedUrl = background.getAttribute('data-cropped-url');
+function updateEventsImages() {
+	const events = document.querySelectorAll('.singleEventImage');
+	events.forEach((background) => {
+		const originalUrl = background.getAttribute('data-original-url');
+		const croppedUrl = background.getAttribute('data-cropped-url');
 
-			if (window.innerWidth <= 800) {
-				background.style.backgroundImage = `url(${originalUrl})`;
-			} else {
-				background.style.backgroundImage = `url(${croppedUrl})`;
-			}
-		});
-	}
-
-	// Update background images on initial load
-	updateBackgroundImages();
-	updateLandingPageImages();
-	updateEventsImages();
-
-	// Update background images on window resize
-	window.addEventListener('resize', updateBackgroundImages, updateLandingPageImages, updateEventsImages);
-});
+		if (window.innerWidth <= 800) {
+			background.style.backgroundImage = `url(${originalUrl})`;
+		} else {
+			background.style.backgroundImage = `url(${croppedUrl})`;
+		}
+	});
+}
 
 function copyToClipboard() {
 	// Get the text field
@@ -144,4 +183,13 @@ function getCookie(name) {
 	const value = `; ${document.cookie}`;
 	const parts = value.split(`; ${name}=`);
 	if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function rebindDivisionTabListener() {
+	$(document).off('shown.bs.tab', '#subEvent_tabs a[data-toggle="pill"]');
+	$(document).on('shown.bs.tab', '#subEvent_tabs a[data-toggle="pill"]', function (e) {
+		const href = $(e.target).attr('href');
+		console.log('Saving DivTab to localStorage:', href);
+		localStorage.setItem('DivTab', href);
+	});
 }

@@ -88,7 +88,7 @@
 				}
 
 				// Save tab on change
-				$('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+				$('#event_tabs a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
 					const href = $(e.target).attr('href');
 					localStorage.setItem('activeTab', href);
 
@@ -97,6 +97,21 @@
 					} else {
 						window.location.hash = href;
 					}
+				});
+
+				const savedDivTab = localStorage.getItem('DivTab');
+				if (savedTab) {
+					const targetTab = $('#subEvent_tabs a[href="' + savedTab + '"]');
+					if (targetTab.length) {
+						targetTab.tab('show');
+					}
+				}
+
+				// Listen for tab switch and save active tab to localStorage
+				$('#subEvent_tabs a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+					const href = $(e.target).attr('href');
+					console.log('Tab switched to:', href); // Should log the tab href
+					localStorage.setItem('DivTab', href);
 				});
 
 				// Event listener for the "Delete" button
@@ -158,7 +173,15 @@
 							url: url,
 							method: 'GET',
 							success: function (data) {
-								$('#matchListContainer').html(data.html); // Insert the rendered HTML
+								$('#matchListContainer').html(data.html);
+								rebindDivisionTabListener();
+								const savedTab = localStorage.getItem('DivTab');
+								if (savedTab) {
+									const targetTab = $('#subEvent_tabs a[href="' + savedTab + '"]');
+									if (targetTab.length) {
+										targetTab.tab('show');
+									}
+								}
 							},
 							error: function () {
 								$('#matchListContainer').html('<p>Error loading match list.</p>'); // Show error message

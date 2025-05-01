@@ -69,12 +69,15 @@
 								<td>{{ match.participant2.name|default:"Participant 2" }}</td>
 								<td>
 									{% if match.winner %} {{ match.winner.name}} {% else %}
-									<form method="post" action="{% url 'update_match_winner' %}" class="">
+									<form method="post" action="{% url 'update_match_winner' %}" class="update-match-form">
 										{% if user.is_authenticated or user|has_perm:"events.change_participant" %}
 
 										<div class="d-flex w-100">
 											{% csrf_token %}
+
+											<input type="hidden" name="match_id" value="{{ match.match_id }}" />
 											<select
+												name="winner_id"
 												class="form-control form-control-sm d-inline-block w-auto winner-select"
 												data-match-id="{{ match.match_id }}"
 											>
@@ -115,19 +118,26 @@
 						{% for match in division_data.matches %}
 						<div class="card mb-3 shadow-sm">
 							<div class="card-body p-2">
-								<h6 class="card-title mb-1 font-weight-bold">Match {{ forloop.counter }}</h6>
-								<p class="mb-1"><strong>Round:</strong> {{ match.round_number }}</p>
-								<p class="mb-1">
-									<strong>Red Corner:</strong> {{ match.participant1.name|default:"Participant 1" }}
-								</p>
-								<p class="mb-1">
-									<strong>Blue Corner:</strong> {{ match.participant2.name|default:"Participant 2" }}
-								</p>
-
+								<div class="match-columns">
+									<h6 class="mb-1"><strong>Round:</strong> {{ match.round_number }}</h6>
+									<p class="card-title mb-1 font-weight-bold">Match {{ forloop.counter }}</p>
+								</div>
+								<div class="match-columns">
+									<p class="mb-1">
+										<strong>Red Corner:</strong> {{ match.participant1.name|default:"Participant 1" }}
+									</p>
+									<p class="mb-1">
+										<strong>Blue Corner:</strong> {{ match.participant2.name|default:"Participant 2" }}
+									</p>
+								</div>
 								<div class="mb-1">
 									<strong>Winner:</strong>
 									{% if match.winner %} {{ match.winner.name }} {% else %}
-									<form method="post" action="{% url 'update_match_winner' %}" class="d-flex">
+									<form
+										method="post"
+										action="{% url 'update_match_winner' %}"
+										class="d-flex update-match-form"
+									>
 										{% if user.is_authenticated or user|has_perm:"events.change_participant" %}
 										<div class="d-flex w-100">
 											{% csrf_token %}
@@ -161,123 +171,3 @@
 		{% endfor %}
 	</div>
 </div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-		const savedTab = localStorage.getItem('DivTab');
-		if (savedTab) {
-			const targetTab = document.querySelector(`#subEvent_tabs a[href="${savedTab}"]`);
-			if (targetTab) {
-				$(targetTab).tab('show');
-			}
-		}
-
-		document.querySelectorAll('#subEvent_tabs a[data-toggle="pill"]').forEach(function (tab) {
-			tab.addEventListener('shown.bs.tab', function (e) {
-				const href = e.target.getAttribute('href');
-				localStorage.setItem('DivTab', href);
-			});
-		});
-	});
-</script>
-
-<style>
-	@media (max-width: 768px) {
-		.card-body p {
-			font-size: 14px;
-			margin-bottom: 4px;
-		}
-		.card-title {
-			font-size: 16px;
-		}
-	}
-	.nav-pills .nav-link {
-		background-color: #343a40;
-		color: #ffffff;
-		font-weight: bold;
-		text-transform: uppercase;
-		border-radius: 4px;
-		padding: 8px 15px;
-	}
-
-	.nav-pills .nav-link.active {
-		background-color: #007bff;
-		color: #ffffff;
-	}
-
-	.match-list-container {
-		background-color: #f7f9fc;
-		padding: 30px;
-		border-radius: 8px;
-		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.leaderboard-container {
-		background-color: #ffffff;
-		padding: 20px;
-		border-radius: 8px;
-		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-		width: 250px;
-		height: auto;
-	}
-
-	.match-table-container {
-		background-color: #ffffff;
-		padding: 20px;
-		border-radius: 8px;
-		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-		width: calc(100% - 270px);
-	}
-
-	table th {
-		font-size: 14px;
-		font-weight: 600;
-		text-transform: uppercase;
-		background-color: #343a40;
-		color: white;
-	}
-
-	table td {
-		font-size: 16px;
-		font-weight: 500;
-	}
-
-	.badge-info {
-		background-color: #17a2b8;
-	}
-
-	.text-uppercase {
-		text-transform: uppercase;
-	}
-
-	.font-weight-bold {
-		font-weight: bold;
-	}
-
-	.match-table-container .table {
-		margin-top: 20px;
-	}
-
-	/* Flexbox for better alignment */
-	.d-flex {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	/* Responsive adjustment */
-	@media (max-width: 768px) {
-		.d-flex {
-			flex-direction: column;
-			align-items: stretch;
-		}
-
-		.leaderboard-container {
-			width: 100%;
-			margin-bottom: 20px;
-		}
-
-		.match-table-container {
-			width: 100%;
-		}
-	}
-</style>

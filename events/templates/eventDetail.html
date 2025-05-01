@@ -267,10 +267,12 @@
 						<th scope="col">Last name</th>
 						<th scope="col">Gym</th>
 						<th scope="col">Weight (lbs)</th>
+						<th scope="col">Division</th>
 
 						{% if user.is_superuser %}
-						<th>Delete</th>
 						<th>Paid</th>
+						<th>Delete</th>
+						
 						{% endif %}
 					</tr>
 				</thead>
@@ -282,34 +284,31 @@
 						<td>{{p.last_name}}</td>
 						<td>{{p.school_name}}</td>
 						<td>{{p.weight}}lbs</td>
-						{% if user.is_superuser %}
-						<td>
-							<button
-								class="deleteDialogBtn"
-								data-toggle="modal"
-								data-target="#deleteDialogModel"
-								data-id="{{ p.id }}"
-								data-event-id="{{ p.event.id }}"
-								data-first-name="{{ p.first_name }}"
-								data-last-name="{{ p.last_name }}"
-								data-school-name="{{ p.school_name }}"
-								data-weight="{{ p.weight }}"
-								style="
-									padding: 5px 10px;
-									font-size: 1rem;
-									background-color: red;
-									color: white;
-									border: none;
-									border-radius: 5px;
-									cursor: pointer;
-								"
-							>
-								Delete
-							</button>
-						</td>
 
-						<td>
-							{% if not p.payment_id %}
+
+						<td>{% if user.is_superuser %} 
+							<form method="post" action="{% url 'update_participant_division' %}" class='d-flex'>
+								{% csrf_token %}
+								<input type="hidden" name="event_id" value="{{ p.event.id }}">
+							  	<input type="hidden" name="participant_id" value="{{ p.id }}">
+							  	<select name="division" class="form-control form-control-sm">
+								<option value="">Select Division</option>
+								{% for division in divisions %}
+								<option value="{{ division.id }}" {% if p.division and p.division.id == division.id %} selected {% endif %}>
+								  {{ division.name }}
+								</option>
+								{% endfor %}
+							  </select>
+							  <button type="submit" class="btn btn-sm btn-primary">Save</button>
+							</form>
+
+							{%else%}
+							{{p.division}}
+							{%endif%}
+						  </td>
+
+						{% if user.is_superuser %}
+						<td>		{% if not p.payment_id %}
 							<button
 								class="paidDialogBtn"
 								data-toggle="modal"
@@ -347,6 +346,33 @@
 								/>
 							</svg>
 							{%endif%}
+						</td>
+
+						<td>
+					
+							<button
+							class="deleteDialogBtn"
+							data-toggle="modal"
+							data-target="#deleteDialogModel"
+							data-id="{{ p.id }}"
+							data-event-id="{{ p.event.id }}"
+							data-first-name="{{ p.first_name }}"
+							data-last-name="{{ p.last_name }}"
+							data-school-name="{{ p.school_name }}"
+							data-weight="{{ p.weight }}"
+							style="
+								padding: 5px 10px;
+								font-size: 1rem;
+								background-color: red;
+								color: white;
+								border: none;
+								border-radius: 5px;
+								cursor: pointer;
+							"
+						>
+							Delete
+						</button>
+
 						</td>
 
 						{% endif %}
@@ -428,7 +454,9 @@
 		</div>
 
 		<div id="matchList" role="tabpanel" class="tab-pane fade" aria-labelledby="matchList-tab">
-			<div id="matchListContainer"></div>
+			<div id="matchListContainer">
+				<span> If you cant see anything under this, click into another tab and click back into this tab</span>
+			</div>
 		</div>
 	</div>
 </div>

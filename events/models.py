@@ -37,12 +37,15 @@ class Division(models.Model):
             Match.objects.create(division=self, participant1=p1, participant2=p2)
 
     def generate_matches_with_rounds(self):
-        participants = list(self.participants.filter(deleted=False))
+        self.matches.all().delete()
+        participants = list(self.participants.filter(deleted=False).order_by('id'))
         num_participants = len(participants)
 
-        is_odd = num_participants % 2 == 1
-        if is_odd:
-            participants.append(None)  # Add a bye if odd
+        if num_participants < 2:
+            return  # Not enough participants
+
+        if num_participants % 2 == 1:
+            participants.append(None)  # Add a bye
 
         num_rounds = len(participants) - 1
         mid = len(participants) // 2
@@ -52,26 +55,19 @@ class Division(models.Model):
                 p1 = participants[i]
                 p2 = participants[-(i + 1)]
 
-                # Check if either participant is None (which means they have a bye)
-                if p1 is None or p2 is None:
-                    # Create a match with None as one of the participants
-                    Match.objects.create(
-                        division=self,
-                        participant1=p1,
-                        participant2=p2,
-                        round_number=round_number + 1
-                    )
-                else:
-                    # Create a regular match between two participants
-                    Match.objects.create(
-                        division=self,
-                        participant1=p1,
-                        participant2=p2,
-                        round_number=round_number + 1
-                    )
+                Match.objects.create(
+                    division=self,
+                    participant1=p1,
+                    participant2=p2,
+                    round_number=round_number + 1
+                )
 
-            # Rotate participants for next round
-            participants = [participants[0]] + [participants[-1]] + participants[1:-1]
+            # Rotate (except the first element)
+            first = participants[0]
+            rest = participants[1:]
+            rest = [rest[-1]] + rest[:-1]
+            participants = [first] + rest
+
 
     def get_winner(self):
         return self.participants.order_by('-points').first()
