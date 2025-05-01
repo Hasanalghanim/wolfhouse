@@ -127,7 +127,7 @@ def match_list(request, event_id):
 
     for division in divisions:
         # Get all matches for the current division
-        matches = Match.objects.filter(division=division).order_by('id')
+        matches = Match.objects.filter(division=division).order_by('round_number','id')
         
         participants = Participant.objects.filter(division=division,deleted=False).annotate(
             total_points=F('points')).order_by('-total_points')
