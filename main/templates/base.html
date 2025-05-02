@@ -58,10 +58,65 @@
 				</a>
 			</div>
 		</nav>
+		<div class="centered-login-indicator">
+			{% if user.is_authenticated %}
+			<p class="m-0">LOGGED IN as {{ user }}</p>
+			{% endif %}
+		</div>
 
 		{% block content %} {% endblock %}
 
-		<footer class="footerBar">&copy; <span id="footer-year"></span> <span> All Rights reserved.</span></footer>
+		<footer class="footerBar">
+			<div>&copy; <span id="footer-year"></span> <span> All Rights reserved.</span></div>
+			{% if user.is_authenticated %}
+			<form method="POST" action="{% url 'logout_view' %}" id="logoutForm">
+				{% csrf_token %}
+				<button type="submit" class="btn btn-dark" data-toggle="modal" data-target="#loginDialog">Logout</button>
+			</form>
+			{% else %}
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginDialog">Login</button>
+		</footer>
+
+		<div
+			class="modal fade"
+			id="loginDialog"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="loginDialogTitle"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="loginModalLongTitle">LOGIN</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						{% if login_error %}
+						<div class="alert alert-danger">{{ login_error }}</div>
+						{% endif %}
+						<form method="POST" action="{% url 'login_view' %}" id="loginForm">
+							{% csrf_token %}
+							<div class="mb-3">
+								<label for="usernameInput" class="form-label">Username</label>
+								<input type="text" class="form-control" id="usernameInput" name="username" required />
+
+								<label for="passwordInput" class="form-label">Password</label>
+								<input type="password" class="form-control" id="passwordInput" name="password" required />
+								<div style="display: none">
+									<label for="bot_field">Leave this field empty</label>
+									<input type="text" name="bot_field" id="bot_field" />
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">Login</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			{%endif%}
+		</div>
 
 		<!-- jQuery, Popper.js, and Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -72,6 +127,14 @@
 
 		<script src="https://gymdesk.com/js/widgets.js"></script>
 		<script type="text/javascript" src="{% static 'functions.js' %}"></script>
+
+		{% if login_modal_open %}
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				$('#loginDialog').modal('show');
+			});
+		</script>
+		{% endif %}
 
 		<script>
 			$(document).ready(function () {
