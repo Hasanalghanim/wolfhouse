@@ -3,13 +3,6 @@ body {
 	flex-direction: column;
 }
 
-.centered-login-indicator {
-	background-color: #198754; /* Bootstrap success color */
-	color: white;
-
-	display: grid;
-	place-items: center;
-}
 .landingPageBackgroundPhoto {
 	background-size: cover;
 	background-color: white;

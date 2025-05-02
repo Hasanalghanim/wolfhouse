@@ -13,6 +13,14 @@ body {
 	font-style: normal;
 }
 
+.centered-login-indicator {
+	background-color: #198754;
+	color: white;
+
+	display: grid;
+	place-items: center;
+}
+
 @media (min-width: 992px) {
 	.navbar-toggle {
 		display: none;
