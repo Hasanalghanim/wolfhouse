@@ -17,7 +17,9 @@
 		<div class="program-card">
 			<h2>{{ program.name }}</h2>
 
-			<p>{{ program.description }}</p>
+			<div class="program-description-content">
+   					 {{ program.description|safe }}
+			</div>
 
 			<div class="program-info">
 				<span> Ages {{ program.age_min }}–{{ program.age_max }} </span>

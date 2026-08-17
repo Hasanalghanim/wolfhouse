@@ -1,14 +1,15 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Program(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-    description = models.TextField()
+    description = RichTextField()
     age_min = models.PositiveIntegerField()
     age_max = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    schedule = models.TextField()
+    schedule = RichTextField()
     location = models.CharField(max_length=200)
     capacity = models.PositiveIntegerField(default=20)
     registration_open = models.BooleanField(default=True)

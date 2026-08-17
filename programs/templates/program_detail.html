@@ -20,7 +20,9 @@
 	<div class="program-description">
 		<h2>ABOUT THE PROGRAM</h2>
 
-		<p>{{ program.description }}</p>
+		<div class="program-description-content">
+    {{ program.description|safe }}
+</div>
 	</div>
 
 	<div class="program-details">
@@ -31,7 +33,9 @@
 
 		<div>
 			<h3>SCHEDULE</h3>
-			<p>{{ program.schedule }}</p>
+			<div class="program-schedule-content">
+    			{{ program.schedule|safe }}
+			</div>
 		</div>
 
 		<div>
