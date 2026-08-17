@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'programs',
     'ckeditor',
     'openpyxl',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
