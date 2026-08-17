@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+<section class="programs-section">
+
+    <div class="programs-header">
+
+        <h1>REGISTER YOUR CHILD</h1>
+
+        <h2>{{ program.name }}</h2>
+
+        <p>
+            Ages {{ program.age_min }}–{{ program.age_max }}
+        </p>
+
+    </div>
+
+
+    <form method="POST" class="registration-form">
+
+        {% csrf_token %}
+
+
+        <div class="form-section">
+
+            <h2>PARENT / GUARDIAN INFORMATION</h2>
+
+            <div class="form-group">
+                {{ form.parent_name.label_tag }}
+                {{ form.parent_name }}
+
+                {% for error in form.parent_name.errors %}
+                    <div class="form-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="form-group">
+                {{ form.parent_email.label_tag }}
+                {{ form.parent_email }}
+
+                {% for error in form.parent_email.errors %}
+                    <div class="form-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="form-group">
+                {{ form.parent_phone.label_tag }}
+                {{ form.parent_phone }}
+
+                {% for error in form.parent_phone.errors %}
+                    <div class="form-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>CHILD INFORMATION</h2>
+
+            <div class="form-group">
+                {{ form.child_name.label_tag }}
+                {{ form.child_name }}
+
+                {% for error in form.child_name.errors %}
+                    <div class="form-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="form-group">
+                {{ form.child_dob.label_tag }}
+                {{ form.child_dob }}
+
+                {% for error in form.child_dob.errors %}
+                    <div class="form-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>EMERGENCY CONTACT</h2>
+
+            <div class="form-group">
+                {{ form.emergency_contact.label_tag }}
+                {{ form.emergency_contact }}
+            </div>
+
+            <div class="form-group">
+                {{ form.emergency_phone.label_tag }}
+                {{ form.emergency_phone }}
+            </div>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>ADDITIONAL INFORMATION</h2>
+
+            <div class="form-group">
+                {{ form.additional_information.label_tag }}
+                {{ form.additional_information }}
+            </div>
+
+        </div>
+
+
+<div class="form-section">
+
+					<h2>CONSENT</h2>
+
+					<div class="checkbox-group">
+						<input
+							type="checkbox"
+							name="waiver_accepted"
+							id="id_waiver_accepted"
+							{% if form.waiver_accepted.value %}checked{% endif %}
+							required
+						>
+
+						<label for="id_waiver_accepted">
+							I agree to the Wolfhouse MMA waiver.
+						</label>
+
+						{% for error in form.waiver_accepted.errors %}
+							<div class="form-error">
+								{{ error }}
+							</div>
+						{% endfor %}
+					</div>
+
+
+					<div class="checkbox-group">
+
+						<input
+							type="checkbox"
+							name="terms_accepted"
+							id="id_terms_accepted"
+							{% if form.terms_accepted.value %}checked{% endif %}
+							required
+						>
+
+						<label for="id_terms_accepted">
+							I agree to the program terms and conditions.
+						</label>
+
+						{% for error in form.terms_accepted.errors %}
+							<div class="form-error">
+								{{ error }}
+							</div>
+						{% endfor %}
+
+					</div>
+
+				</div>
+
+
+        {% if form.non_field_errors %}
+
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+
+        {% endif %}
+
+
+        <button
+            type="submit"
+            class="program-button"
+        >
+            SUBMIT REGISTRATION
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

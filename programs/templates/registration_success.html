@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="registration-success">
+
+    <h1>REGISTRATION RECEIVED</h1>
+
+    <p>
+        Thank you for registering with Wolfhouse MMA.
+    </p>
+
+    <p>
+        We've received your registration and will
+        contact you with the next steps.
+    </p>
+
+    <a
+        href="{% url 'programs' %}"
+        class="program-button"
+    >
+        BACK TO PROGRAMS
+    </a>
+
+</section>
+
+{% endblock %}

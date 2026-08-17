@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="programs-section ">
+	
+	
+	<div class="programs-header">
+		<h1>PROGRAMS</h1>
+
+		<p>Training programs for kids, youth, and families at Wolfhouse MMA.</p>
+	</div>
+
+
+
+	<div class="program-grid">
+		{% for program in programs %}
+
+		<div class="program-card">
+			<h2>{{ program.name }}</h2>
+
+			<p>{{ program.description }}</p>
+
+			<div class="program-info">
+				<span> Ages {{ program.age_min }}–{{ program.age_max }} </span>
+
+				<span> ${{ program.price }}/month </span>
+
+				<span> {{ program.spots_remaining }} spots remaining </span>
+			</div>
+
+			<a href="{% url 'program_detail' program.slug %}" class="program-button"> LEARN MORE </a>
+		</div>
+
+		{% empty %}
+
+		<p>No programs are currently available.</p>
+
+		{% endfor %}
+	</div>
+</section>
+
+{% endblock %}

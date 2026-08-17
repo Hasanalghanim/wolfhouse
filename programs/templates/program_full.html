@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="program-message">
+
+    <h1>PROGRAM FULL</h1>
+
+    <h2>{{ program.name }}</h2>
+
+    <p>
+        This program is currently full.
+    </p>
+
+    <a
+        href="{% url 'programs' %}"
+        class="program-button"
+    >
+        VIEW OTHER PROGRAMS
+    </a>
+
+</section>
+
+{% endblock %}

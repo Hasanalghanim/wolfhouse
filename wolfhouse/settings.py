@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-4=67-lgx*#f=qosm)ov2r(i2tvzm07qd)tqo8w9gn__tbai29e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wolfhousemma.com','www.wolfhousemma.com',]
+
+ALLOWED_HOSTS = ['wolfhousemma.com','www.wolfhousemma.com','127.0.0.1']
 
 
 # Application definition
@@ -41,8 +42,9 @@ INSTALLED_APPS = [
     'main',
     'webhook',
     'events',
+    'programs',
     'ckeditor',
-    'openpyxl'
+    'openpyxl',
 ]
 
 MIDDLEWARE = [
@@ -114,19 +116,19 @@ CKEDITOR_CONFIGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'myappdb',
-            'USER': 'hasan',
-            'PASSWORD': 'Nadiasimmer1',
-            'HOST': 'hasanalghanim-3935.postgres.pythonanywhere-services.com',
-            'PORT': 13935
-,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+#     'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'myappdb',
+#             'USER': 'hasan',
+#             'PASSWORD': 'Nadiasimmer1',
+#             'HOST': 'hasanalghanim-3935.postgres.pythonanywhere-services.com',
+#             'PORT': 13935
+# ,
+#     }
 }
 
 

@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="programs-section">
+	<div class="program-hero">
+		<h1>{{ program.name }}</h1>
+
+		<p>Ages {{ program.age_min }}–{{ program.age_max }}</p>
+
+		{% if program.is_full %}
+
+		<span>PROGRAM FULL</span>
+
+		{% else %}
+
+		<a href="{% url 'program_register' program.slug %}" class="program-button"> REGISTER NOW </a>
+
+		{% endif %}
+	</div>
+
+	<div class="program-description">
+		<h2>ABOUT THE PROGRAM</h2>
+
+		<p>{{ program.description }}</p>
+	</div>
+
+	<div class="program-details">
+		<div>
+			<h3>AGES</h3>
+			<p>{{ program.age_min }}–{{ program.age_max }}</p>
+		</div>
+
+		<div>
+			<h3>SCHEDULE</h3>
+			<p>{{ program.schedule }}</p>
+		</div>
+
+		<div>
+			<h3>LOCATION</h3>
+			<p>{{ program.location }}</p>
+		</div>
+
+		<div>
+			<h3>PRICE</h3>
+			<p>${{ program.price }}</p>
+		</div>
+
+		<div>
+			<h3>SPOTS</h3>
+			<p>{{ program.spots_remaining }} remaining</p>
+		</div>
+	</div>
+
+	{% if not program.is_full and program.registration_open %}
+
+	<div class="program-register">
+		<h2>READY TO GET STARTED?</h2>
+
+		<a href="{% url 'program_register' program.slug %}" class="program-button"> REGISTER YOUR CHILD </a>
+	</div>
+
+	{% endif %}
+</section>
+
+{% endblock %}
