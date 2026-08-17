@@ -1,0 +1,140 @@
+.contactUsMainDiv {
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+}
+
+.contactLandingPage {
+	width: 80%;
+	height: 12rem;
+	margin: auto;
+}
+
+.contactContainer {
+	margin-top: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contactContainer h3 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-style: bold;
+	font-size: 6.88rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.contactDetail {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+
+.contactContainerTitle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contactContainerTitle h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-size: 1.563rem;
+	text-transform: uppercase;
+}
+.contactDetailLogos {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 90%;
+	margin: auto;
+}
+.contactDetailLogos div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	width: 12.75rem;
+	height: 16.25rem;
+	border: 1px solid #222222;
+	background-color: #222222;
+	padding-top: 0.813rem;
+	padding-bottom: 0.813rem;
+	border: 1px solid #222222;
+	border-radius: 15px;
+}
+
+.contactDetailLogos h4 {
+	font-family: 'Barlow Condensed', sans-serif;
+	color: white;
+	font-weight: 800;
+	font-size: 1.25rem;
+	text-transform: uppercase;
+	margin: 0px;
+	text-wrap: wrap;
+	text-align: center;
+}
+
+.contactDetailLogos p {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	text-align: center;
+	margin: 0px;
+	color: white;
+}
+
+.mapContainer {
+	width: 100%;
+}
+
+.mapContainer iframe {
+	width: 100%;
+}
+@media (max-width: 991px) {
+	.contactLandingPage {
+		height: 8rem;
+	}
+
+	.contactDetailLogos {
+		display: flex;
+
+		width: 90%;
+		margin: auto;
+		gap: 0.5rem;
+	}
+	.contactDetailLogos div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		height: 7.5rem;
+		width: 8.438rem;
+		padding-top: 0.375rem;
+		padding-bottom: 0.375rem;
+	}
+
+	.contactDetailLogos h4 {
+		font-family: 'Barlow Condensed', sans-serif;
+		font-weight: 800;
+		font-size: 1rem;
+		text-transform: uppercase;
+		margin: 0px;
+		text-wrap: wrap;
+		text-align: center;
+	}
+
+	.contactDetailLogos p {
+		display: none;
+	}
+	.contactUsMainDiv {
+		gap: 2.5rem;
+	}
+
+	.contactContainer h3 {
+		font-size: 2.813rem;
+	}
+}

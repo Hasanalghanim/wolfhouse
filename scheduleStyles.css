@@ -1,0 +1,37 @@
+.scheduleLandingPage {
+	width: 80%;
+	height: 12rem;
+	margin: auto;
+}
+
+.scheduleContainer {
+	margin-top: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5rem;
+}
+
+.scheduleContainer h3 {
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 800;
+	font-style: bold;
+	font-size: 6.88rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.scheduleWidget {
+	padding: 10px;
+	width: 80%;
+	margin: auto;
+	box-sizing: border-box;
+	background-color: #222222;
+	margin-top: 5rem;
+}
+
+@media (max-width: 991px) {
+	.scheduleContainer h3 {
+		font-size: 2.813rem;
+	}
+}

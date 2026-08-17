@@ -1,0 +1,10 @@
+.footerBar {
+	width: 100%;
+	height: 2.8rem;
+	background-color: white;
+	margin: auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+}
